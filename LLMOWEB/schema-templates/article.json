@@ -1,0 +1,174 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "@id": "https://your-site.com/blog/article-title#article",
+
+  "_comment_news": "For news publishers, use NewsArticle instead of Article",
+  "_comment_type_options": "Article, NewsArticle, BlogPosting, TechArticle, ScholarlyArticle",
+
+  "_comment_tier1": "=== TIER 1: ESSENTIAL PROPERTIES (Always include) ===",
+
+  "headline": "Article Headline: Clear and Descriptive (50-70 characters)",
+  "description": "Article summary or excerpt providing context (120-160 characters)",
+
+  "author": {
+    "@type": "Person",
+    "@id": "https://your-site.com/team/author-name#person",
+    "name": "Author Full Name",
+    "url": "https://your-site.com/team/author-name"
+  },
+
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://your-site.com/#organization",
+    "name": "Your Company Name",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://your-site.com/logo.png"
+    }
+  },
+
+  "datePublished": "2024-03-15",
+  "dateModified": "2024-03-16",
+
+  "url": "https://your-site.com/blog/article-title",
+
+  "image": {
+    "@type": "ImageObject",
+    "url": "https://your-site.com/blog/images/article-featured.jpg",
+    "width": "1200",
+    "height": "630",
+    "caption": "Image caption describing what's shown"
+  },
+
+  "_comment_tier2": "=== TIER 2: IMPORTANT PROPERTIES (Include when available) ===",
+
+  "articleBody": "Full article text content goes here. Include the complete text of the article...",
+
+  "wordCount": 1500,
+
+  "articleSection": "Product Updates",
+  "_comment_section_examples": "News, Technology, Business, Product Updates, Guides, Case Studies",
+
+  "keywords": ["keyword1", "keyword2", "keyword3", "keyword4"],
+
+  "about": [
+    {
+      "@type": "Thing",
+      "name": "Topic 1",
+      "description": "Main subject of the article"
+    },
+    {
+      "@type": "Thing",
+      "name": "Topic 2"
+    }
+  ],
+
+  "mentions": [
+    {
+      "@type": "Organization",
+      "@id": "https://mentioned-company.com/#organization",
+      "name": "Mentioned Company"
+    },
+    {
+      "@type": "Person",
+      "name": "Mentioned Person"
+    },
+    {
+      "@type": "Product",
+      "@id": "https://your-site.com/products/product#product",
+      "name": "Product Name"
+    }
+  ],
+
+  "inLanguage": "en-US",
+
+  "thumbnailUrl": "https://your-site.com/blog/images/article-thumb.jpg",
+
+  "alternativeHeadline": "Alternative Headline or Subheading Providing Additional Context",
+
+  "_comment_tier3": "=== TIER 3: NICE-TO-HAVE PROPERTIES (Optional enhancements) ===",
+
+  "isAccessibleForFree": true,
+  "_comment_paywall": "Set to false if behind paywall, or use hasPart for partial access",
+
+  "hasPart": {
+    "@type": "WebPageElement",
+    "isAccessibleForFree": false,
+    "cssSelector": ".premium-content"
+  },
+
+  "isPartOf": {
+    "@type": "CreativeWorkSeries",
+    "name": "Series Name",
+    "url": "https://your-site.com/series/series-name"
+  },
+
+  "position": "2",
+  "_comment_position": "If part of series, indicate position (Part 2 of 5)",
+
+  "commentCount": 24,
+
+  "interactionStatistic": {
+    "@type": "InteractionCounter",
+    "interactionType": "https://schema.org/CommentAction",
+    "userInteractionCount": 24
+  },
+
+  "citation": [
+    {
+      "@type": "CreativeWork",
+      "url": "https://source1.com/article",
+      "name": "Source Article Title"
+    },
+    {
+      "@type": "CreativeWork",
+      "url": "https://source2.com/report",
+      "name": "Research Report Title"
+    }
+  ],
+
+  "backstory": "Context about how this article was created, investigative process, or background",
+
+  "correction": {
+    "@type": "CorrectionComment",
+    "text": "Correction: Updated price from $99 to $89 on March 16, 2024",
+    "datePublished": "2024-03-16"
+  },
+
+  "speakable": {
+    "@type": "SpeakableSpecification",
+    "cssSelector": [".article-intro", ".article-summary"]
+  },
+
+  "video": {
+    "@type": "VideoObject",
+    "name": "Video Title",
+    "description": "Video description",
+    "thumbnailUrl": "https://your-site.com/videos/thumb.jpg",
+    "uploadDate": "2024-03-15",
+    "duration": "PT5M30S",
+    "contentUrl": "https://your-site.com/videos/video.mp4"
+  },
+
+  "audio": {
+    "@type": "AudioObject",
+    "name": "Audio Version",
+    "contentUrl": "https://your-site.com/audio/article.mp3",
+    "duration": "PT8M15S"
+  },
+
+  "_usage_instructions": {
+    "required_tier1": ["headline", "description", "author", "publisher", "datePublished", "url", "image"],
+    "recommended_tier2": ["articleBody", "wordCount", "articleSection", "keywords", "about", "mentions"],
+    "optional_tier3": ["isAccessibleForFree", "isPartOf", "commentCount", "citation"],
+    "blog_posts": "Use Article or BlogPosting type",
+    "news_articles": "Use NewsArticle type for time-sensitive news",
+    "guides": "Use HowTo type for step-by-step guides",
+    "technical": "Use TechArticle for technical documentation",
+    "author_note": "Author should reference Person entity with full bio page",
+    "mentions_note": "Link all mentioned entities (companies, people, products)",
+    "citations_note": "Credit sources with citation property",
+    "remove_this_section": "Delete this _usage_instructions object and all _comment fields before using"
+  }
+}

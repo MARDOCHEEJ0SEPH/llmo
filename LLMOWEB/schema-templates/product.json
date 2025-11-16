@@ -1,0 +1,181 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "@id": "https://your-site.com/products/product-name#product",
+
+  "_comment_tier1": "=== TIER 1: ESSENTIAL PROPERTIES (Always include) ===",
+
+  "name": "Product Name",
+  "description": "Detailed product description including what it is, who it's for, key features, and benefits (200-300 characters)",
+
+  "image": [
+    "https://your-site.com/images/product-main.jpg",
+    "https://your-site.com/images/product-angle1.jpg",
+    "https://your-site.com/images/product-angle2.jpg",
+    "https://your-site.com/images/product-detail.jpg"
+  ],
+
+  "brand": {
+    "@type": "Brand",
+    "name": "Brand Name"
+  },
+
+  "offers": {
+    "@type": "Offer",
+    "price": "99.99",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock",
+    "url": "https://your-site.com/products/product-name",
+    "seller": {
+      "@type": "Organization",
+      "@id": "https://your-site.com/#organization"
+    }
+  },
+
+  "category": "Product Category",
+
+  "_comment_tier2": "=== TIER 2: IMPORTANT PROPERTIES (Include when available) ===",
+
+  "sku": "PROD-12345",
+  "mpn": "MPN-67890",
+  "gtin13": "1234567890123",
+  "_comment_gtin": "Use gtin, gtin13, gtin14, gtin8 for UPC/EAN barcodes",
+
+  "manufacturer": {
+    "@type": "Organization",
+    "name": "Manufacturer Name",
+    "url": "https://manufacturer.com"
+  },
+
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.5",
+    "reviewCount": "127",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+
+  "review": [
+    {
+      "@type": "Review",
+      "author": {
+        "@type": "Person",
+        "name": "Jane Doe"
+      },
+      "datePublished": "2024-03-01",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5"
+      },
+      "reviewBody": "Excellent product. Works exactly as described. Fast shipping."
+    }
+  ],
+
+  "color": ["Black", "White", "Navy Blue"],
+  "material": "100% Cotton",
+  "size": ["Small", "Medium", "Large", "X-Large"],
+
+  "width": {
+    "@type": "QuantitativeValue",
+    "value": "24",
+    "unitCode": "INH"
+  },
+  "height": {
+    "@type": "QuantitativeValue",
+    "value": "36",
+    "unitCode": "INH"
+  },
+  "depth": {
+    "@type": "QuantitativeValue",
+    "value": "3",
+    "unitCode": "INH"
+  },
+  "weight": {
+    "@type": "QuantitativeValue",
+    "value": "2.5",
+    "unitCode": "LBR"
+  },
+
+  "_comment_additional_specs": "For technical products, use additionalProperty",
+  "additionalProperty": [
+    {
+      "@type": "PropertyValue",
+      "name": "Operating Temperature",
+      "value": "-40°F to 250°F",
+      "unitCode": "FAH"
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "Pressure Rating",
+      "value": "150 PSI",
+      "unitCode": "BAR"
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "Material of Construction",
+      "value": "316 Stainless Steel"
+    }
+  ],
+
+  "_comment_tier3": "=== TIER 3: NICE-TO-HAVE PROPERTIES (Optional enhancements) ===",
+
+  "model": "Model-X-2024",
+  "productID": "PROD-12345",
+
+  "isRelatedTo": [
+    {
+      "@type": "Product",
+      "@id": "https://your-site.com/products/related-product#product",
+      "name": "Related Product Name"
+    }
+  ],
+
+  "isAccessoryOf": [
+    {
+      "@type": "Product",
+      "@id": "https://your-site.com/products/main-product#product",
+      "name": "Main Product Name"
+    }
+  ],
+
+  "isSimilarTo": [
+    {
+      "@type": "Product",
+      "name": "Alternative Product",
+      "url": "https://your-site.com/products/alternative"
+    }
+  ],
+
+  "isVariantOf": {
+    "@type": "Product",
+    "@id": "https://your-site.com/products/product-family#product",
+    "name": "Product Family Name"
+  },
+
+  "award": "Best Product 2024 - Industry Magazine",
+
+  "releaseDate": "2024-01-15",
+
+  "countryOfOrigin": {
+    "@type": "Country",
+    "name": "United States"
+  },
+
+  "itemCondition": "https://schema.org/NewCondition",
+  "_comment_condition_options": "NewCondition, UsedCondition, RefurbishedCondition, DamagedCondition",
+
+  "audience": {
+    "@type": "PeopleAudience",
+    "audienceType": "Small business owners, Professionals"
+  },
+
+  "_usage_instructions": {
+    "required_tier1": ["name", "description", "image", "brand", "offers", "category"],
+    "recommended_tier2": ["sku", "manufacturer", "aggregateRating", "color", "material", "dimensions", "weight"],
+    "optional_tier3": ["model", "isRelatedTo", "award", "releaseDate"],
+    "ecommerce_note": "Include all available specifications for better search/filter",
+    "b2b_note": "Use additionalProperty extensively for technical specifications",
+    "variants_note": "For products with variants (color/size), see product-with-variants.json template",
+    "remove_this_section": "Delete this _usage_instructions object and all _comment fields before using"
+  }
+}

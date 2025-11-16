@@ -1,0 +1,159 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "https://your-site.com/team/person-name#person",
+
+  "_comment_tier1": "=== TIER 1: ESSENTIAL PROPERTIES (Always include) ===",
+
+  "name": "Full Name",
+  "jobTitle": "Chief Executive Officer",
+  "worksFor": {
+    "@type": "Organization",
+    "@id": "https://your-site.com/#organization",
+    "name": "Your Company Name"
+  },
+  "url": "https://your-site.com/team/person-name",
+  "image": "https://your-site.com/team/photos/person-name.jpg",
+
+  "_comment_tier2": "=== TIER 2: IMPORTANT PROPERTIES (Include when available) ===",
+
+  "description": "Brief professional bio highlighting expertise, experience, and role (150-250 characters)",
+
+  "email": "name@your-company.com",
+  "telephone": "+1-415-555-0123",
+
+  "sameAs": [
+    "https://www.linkedin.com/in/personname",
+    "https://twitter.com/personname",
+    "https://github.com/personname"
+  ],
+
+  "alumniOf": [
+    {
+      "@type": "EducationalOrganization",
+      "name": "Stanford University",
+      "url": "https://stanford.edu"
+    },
+    {
+      "@type": "EducationalOrganization",
+      "name": "MIT",
+      "url": "https://mit.edu"
+    }
+  ],
+
+  "knowsAbout": [
+    "Software Development",
+    "Product Management",
+    "SaaS Business Models",
+    "Team Leadership",
+    "Customer Success"
+  ],
+
+  "_comment_expertise": "List 5-10 areas of expertise, beats, or topics this person knows deeply",
+
+  "award": [
+    "Forbes 30 Under 30 (2023)",
+    "Best CEO Award - Industry Magazine (2024)"
+  ],
+
+  "_comment_tier3": "=== TIER 3: NICE-TO-HAVE PROPERTIES (Optional enhancements) ===",
+
+  "honorificPrefix": "Dr.",
+  "_comment_prefix_options": "Dr., Prof., Rev., etc.",
+
+  "givenName": "John",
+  "familyName": "Smith",
+  "additionalName": "Michael",
+
+  "gender": "Male",
+
+  "nationality": {
+    "@type": "Country",
+    "name": "United States"
+  },
+
+  "birthPlace": {
+    "@type": "Place",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "San Francisco",
+      "addressRegion": "CA",
+      "addressCountry": "US"
+    }
+  },
+
+  "affiliation": [
+    {
+      "@type": "Organization",
+      "name": "Industry Association Name",
+      "url": "https://association.org"
+    }
+  ],
+
+  "memberOf": [
+    {
+      "@type": "Organization",
+      "name": "Professional Society Name",
+      "url": "https://society.org"
+    }
+  ],
+
+  "colleague": [
+    {
+      "@type": "Person",
+      "@id": "https://your-site.com/team/colleague1#person",
+      "name": "Colleague Name"
+    }
+  ],
+
+  "knows": [
+    {
+      "@type": "Person",
+      "name": "Industry Expert Name",
+      "url": "https://example.com/expert"
+    }
+  ],
+
+  "_comment_founders": "For founders, declare founding relationship",
+  "founder": {
+    "@type": "Organization",
+    "@id": "https://your-site.com/#organization",
+    "name": "Your Company Name",
+    "foundingDate": "2020-01-15"
+  },
+
+  "_comment_authors": "For content authors, link to their content",
+  "author": [
+    {
+      "@type": "Article",
+      "@id": "https://your-site.com/blog/article-1#article",
+      "headline": "Article Title"
+    }
+  ],
+
+  "hasOccupation": {
+    "@type": "Occupation",
+    "name": "Software Engineer",
+    "occupationalCategory": "15-1252.00"
+  },
+
+  "hasCredential": [
+    {
+      "@type": "EducationalOccupationalCredential",
+      "name": "Certified Public Accountant (CPA)",
+      "credentialCategory": "Professional Certification"
+    }
+  ],
+
+  "_usage_instructions": {
+    "required_tier1": ["name", "jobTitle", "worksFor", "url", "image"],
+    "recommended_tier2": ["description", "email", "sameAs", "alumniOf", "knowsAbout"],
+    "optional_tier3": ["honorificPrefix", "award", "affiliation", "colleague"],
+    "team_pages": "Use for all team members on About/Team pages",
+    "authors": "Use for blog post authors with full author pages",
+    "leadership": "Include all Tier 2 properties for founders/executives",
+    "experts": "Emphasize knowsAbout for subject matter experts",
+    "journalists": "For publishers, include beat coverage in knowsAbout",
+    "remove_this_section": "Delete this _usage_instructions object and all _comment fields before using"
+  }
+}

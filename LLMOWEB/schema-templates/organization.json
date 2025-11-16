@@ -1,0 +1,147 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://your-site.com/#organization",
+
+  "_comment_tier1": "=== TIER 1: ESSENTIAL PROPERTIES (Always include) ===",
+
+  "name": "Your Company Name",
+  "legalName": "Your Company Legal Name Inc.",
+  "url": "https://your-site.com",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://your-site.com/logo.png",
+    "width": "600",
+    "height": "60"
+  },
+  "description": "Brief description of what your company does (120-160 characters optimal)",
+
+  "_comment_tier2": "=== TIER 2: IMPORTANT PROPERTIES (Include when available) ===",
+
+  "foundingDate": "2020-01-15",
+  "founder": [
+    {
+      "@type": "Person",
+      "@id": "https://your-site.com/team/founder#person",
+      "name": "Founder Name"
+    }
+  ],
+
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "123 Main Street, Suite 100",
+    "addressLocality": "San Francisco",
+    "addressRegion": "CA",
+    "postalCode": "94102",
+    "addressCountry": "US"
+  },
+
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+1-415-555-0123",
+    "contactType": "customer service",
+    "email": "support@your-site.com",
+    "availableLanguage": ["en", "es"]
+  },
+
+  "sameAs": [
+    "https://www.linkedin.com/company/your-company",
+    "https://twitter.com/yourcompany",
+    "https://www.facebook.com/yourcompany",
+    "https://github.com/yourcompany"
+  ],
+
+  "numberOfEmployees": {
+    "@type": "QuantitativeValue",
+    "value": 50
+  },
+
+  "employee": [
+    {
+      "@type": "Person",
+      "@id": "https://your-site.com/team/ceo#person"
+    },
+    {
+      "@type": "Person",
+      "@id": "https://your-site.com/team/cto#person"
+    }
+  ],
+
+  "_comment_products": "Link to your products/services",
+  "makesOffer": [
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Product",
+        "@id": "https://your-site.com/products/product-1#product"
+      }
+    }
+  ],
+
+  "_comment_tier3": "=== TIER 3: NICE-TO-HAVE PROPERTIES (Optional enhancements) ===",
+
+  "alternateName": "YourCo",
+  "slogan": "Your company tagline",
+
+  "areaServed": {
+    "@type": "GeoCircle",
+    "geoMidpoint": {
+      "@type": "GeoCoordinates",
+      "latitude": "37.7749",
+      "longitude": "-122.4194"
+    },
+    "geoRadius": "5000000"
+  },
+
+  "_comment_or_specific_countries": "Or list specific countries/regions",
+  "areaServed_alternative": ["US", "CA", "GB", "AU"],
+
+  "award": [
+    "Best Workplace 2024",
+    "Inc. 5000 Fastest Growing Companies"
+  ],
+
+  "knowsAbout": [
+    "Software Development",
+    "Customer Relationship Management",
+    "Sales Automation"
+  ],
+
+  "parentOrganization": {
+    "@type": "Organization",
+    "@id": "https://parent-company.com/#organization",
+    "name": "Parent Company Name"
+  },
+
+  "subOrganization": [
+    {
+      "@type": "Organization",
+      "name": "Subsidiary Name",
+      "url": "https://subsidiary.com"
+    }
+  ],
+
+  "member": [
+    {
+      "@type": "Organization",
+      "name": "Industry Association Name",
+      "url": "https://association.org"
+    }
+  ],
+
+  "publishingPrinciples": "https://your-site.com/editorial-standards",
+  "diversityPolicy": "https://your-site.com/diversity",
+  "ethicsPolicy": "https://your-site.com/ethics",
+
+  "_comment_news_media": "For news publishers, add NewsMediaOrganization properties",
+  "correctionsPolicy": "https://your-site.com/corrections",
+  "ownershipFundingInfo": "https://your-site.com/ownership",
+
+  "_usage_instructions": {
+    "required_tier1": ["name", "url", "logo", "description"],
+    "recommended_tier2": ["foundingDate", "address", "contactPoint", "sameAs", "employee"],
+    "optional_tier3": ["award", "knowsAbout", "parentOrganization"],
+    "minimum_completeness": "Include all Tier 1 + at least 50% of Tier 2",
+    "remove_this_section": "Delete this _usage_instructions object before using"
+  }
+}

@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acme CRM - Customer Relationship Management for Small Teams</title>
+    <meta name="description" content="Cloud-based CRM software with contact management, sales pipeline tracking, and email integration. Designed for teams of 5-50 people. Free trial available.">
+
+    <!-- JSON-LD Schema Markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://acme.com/#organization",
+          "name": "Acme Corp",
+          "legalName": "Acme Corporation Inc.",
+          "url": "https://acme.com",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://acme.com/images/logo.png",
+            "width": "600",
+            "height": "60"
+          },
+          "description": "Provider of cloud-based business software for small to medium businesses",
+          "foundingDate": "2018-03-15",
+          "founder": {
+            "@type": "Person",
+            "@id": "https://acme.com/team/jane-doe#person",
+            "name": "Jane Doe"
+          },
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "123 Tech Boulevard, Suite 400",
+            "addressLocality": "San Francisco",
+            "addressRegion": "CA",
+            "postalCode": "94105",
+            "addressCountry": "US"
+          },
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+1-415-555-0100",
+            "contactType": "customer service",
+            "email": "support@acme.com",
+            "availableLanguage": ["en", "es"]
+          },
+          "sameAs": [
+            "https://www.linkedin.com/company/acme-corp",
+            "https://twitter.com/acmecorp",
+            "https://www.facebook.com/acmecorp"
+          ]
+        },
+        {
+          "@type": "SoftwareApplication",
+          "@id": "https://acme.com/products/crm#product",
+          "name": "Acme CRM",
+          "applicationCategory": "BusinessApplication",
+          "description": "Cloud-based CRM software providing contact management, sales pipeline tracking, email integration, and team collaboration for small to medium businesses.",
+          "url": "https://acme.com/products/crm",
+          "offers": [
+            {
+              "@type": "Offer",
+              "name": "Free Plan",
+              "price": "0",
+              "priceCurrency": "USD",
+              "description": "Up to 5 users, 1,000 contacts, basic features",
+              "availability": "https://schema.org/InStock",
+              "url": "https://acme.com/pricing"
+            },
+            {
+              "@type": "Offer",
+              "name": "Pro Plan",
+              "price": "49.00",
+              "priceCurrency": "USD",
+              "priceSpecification": {
+                "@type": "UnitPriceSpecification",
+                "price": "49.00",
+                "priceCurrency": "USD",
+                "billingDuration": {
+                  "@type": "QuantitativeValue",
+                  "value": "1",
+                  "unitCode": "MON"
+                },
+                "unitText": "per user per month"
+              },
+              "description": "Up to 25 users, unlimited contacts, all features",
+              "availability": "https://schema.org/InStock"
+            },
+            {
+              "@type": "Offer",
+              "name": "Enterprise Plan",
+              "price": "Contact for quote",
+              "priceCurrency": "USD",
+              "description": "Unlimited users, premium support, custom integrations, dedicated account manager",
+              "availability": "https://schema.org/InStock"
+            }
+          ],
+          "featureList": [
+            "Contact Management (unlimited contacts)",
+            "Sales Pipeline Tracking (5-stage customizable pipeline)",
+            "Email Integration (Gmail, Outlook, Apple Mail)",
+            "Task Management with reminders",
+            "Custom Reports and Dashboards",
+            "Mobile Apps (iOS, Android)",
+            "Team Collaboration Tools",
+            "API Access (Pro and Enterprise)",
+            "Calendar Integration",
+            "Activity Logging and Timeline"
+          ],
+          "screenshot": [
+            {
+              "@type": "ImageObject",
+              "url": "https://acme.com/images/screenshots/dashboard.png",
+              "caption": "Main dashboard showing pipeline view with deal stages and revenue forecasting",
+              "width": "1200",
+              "height": "800"
+            },
+            {
+              "@type": "ImageObject",
+              "url": "https://acme.com/images/screenshots/contacts.png",
+              "caption": "Contact management interface with segmentation and filtering",
+              "width": "1200",
+              "height": "800"
+            }
+          ],
+          "operatingSystem": "Web-based, iOS 14+, Android 10+",
+          "softwareVersion": "4.2.1",
+          "releaseNotes": "https://acme.com/changelog",
+          "datePublished": "2018-06-20",
+          "dateModified": "2024-03-10",
+          "provider": {
+            "@id": "https://acme.com/#organization"
+          },
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "ratingCount": "1247",
+            "bestRating": "5",
+            "worstRating": "1"
+          },
+          "review": [
+            {
+              "@type": "Review",
+              "author": {
+                "@type": "Person",
+                "name": "Mike Johnson"
+              },
+              "datePublished": "2024-03-01",
+              "reviewRating": {
+                "@type": "Rating",
+                "ratingValue": "5",
+                "bestRating": "5"
+              },
+              "reviewBody": "Switched from Salesforce and couldn't be happier. Acme CRM is 10x easier to use and our team actually adopted it within 2 weeks. Deal visibility improved dramatically."
+            },
+            {
+              "@type": "Review",
+              "author": {
+                "@type": "Person",
+                "name": "Sarah Chen"
+              },
+              "datePublished": "2024-02-15",
+              "reviewRating": {
+                "@type": "Rating",
+                "ratingValue": "5",
+                "bestRating": "5"
+              },
+              "reviewBody": "Perfect for our 12-person sales team. Gmail integration works flawlessly. Pipeline tracking gives us complete visibility into our $2M+ pipeline. ROI was positive within 3 months."
+            }
+          ],
+          "isAccessoryOf": [
+            {
+              "@type": "SoftwareApplication",
+              "name": "Gmail"
+            },
+            {
+              "@type": "SoftwareApplication",
+              "name": "Microsoft Outlook"
+            },
+            {
+              "@type": "SoftwareApplication",
+              "name": "Slack"
+            }
+          ]
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://acme.com"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Products",
+              "item": "https://acme.com/products"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Acme CRM",
+              "item": "https://acme.com/products/crm"
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+
+    <style>
+        /* Minimal styling for demonstration */
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.6; max-width: 1200px; margin: 0 auto; padding: 20px; }
+        header { border-bottom: 2px solid #e0e0e0; padding-bottom: 20px; margin-bottom: 30px; }
+        nav.breadcrumb { font-size: 0.9em; color: #666; margin-bottom: 20px; }
+        h1 { font-size: 2.5em; margin-bottom: 0.3em; }
+        h2 { font-size: 1.8em; margin-top: 1.5em; border-bottom: 1px solid #e0e0e0; padding-bottom: 0.3em; }
+        h3 { font-size: 1.3em; }
+        .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .feature-item { padding: 15px; border: 1px solid #e0e0e0; border-radius: 5px; }
+        .pricing { display: flex; gap: 20px; }
+        .pricing-tier { flex: 1; border: 2px solid #e0e0e0; border-radius: 8px; padding: 20px; }
+        .pricing-tier.featured { border-color: #007bff; }
+        .price { font-size: 2em; font-weight: bold; }
+        .rating { color: #ffa500; font-size: 1.2em; }
+        .review { background: #f9f9f9; padding: 15px; margin: 10px 0; border-left: 3px solid #007bff; }
+        footer { margin-top: 50px; padding-top: 20px; border-top: 2px solid #e0e0e0; color: #666; }
+    </style>
+</head>
+<body>
+    <header>
+        <div>
+            <strong>Acme Corp</strong> |
+            <a href="/">Home</a> |
+            <a href="/products">Products</a> |
+            <a href="/pricing">Pricing</a> |
+            <a href="/about">About</a>
+        </div>
+    </header>
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="https://acme.com">Home</a> ›
+        <a href="https://acme.com/products">Products</a> ›
+        <span>Acme CRM</span>
+    </nav>
+
+    <main>
+        <article itemscope itemtype="https://schema.org/SoftwareApplication">
+            <h1 itemprop="name">Acme CRM</h1>
+            <p itemprop="description" style="font-size: 1.2em; color: #333;">
+                Cloud-based customer relationship management software designed for small teams.
+                Manage 10,000+ contacts, track deals through customizable 5-stage pipelines, and integrate seamlessly with Gmail and Outlook.
+                Teams of 5-50 people see 40% faster deal closure within 6 months.
+            </p>
+
+            <div class="rating">
+                ★★★★★ <span style="color: #333;">4.8 (1,247 reviews)</span>
+            </div>
+
+            <section id="features">
+                <h2>Features</h2>
+                <p>
+                    Acme CRM provides everything sales teams need to close more deals faster.
+                    Each feature integrates seamlessly to create a unified sales workflow from first contact to closed deal.
+                    No complex configuration required—start selling within minutes of signup.
+                </p>
+                <div class="features">
+                    <div class="feature-item">
+                        <h3>Contact Management</h3>
+                        <p>Store unlimited contacts with custom fields, tags, and segmentation. Import from CSV, Gmail, or Outlook in one click. Automatic duplicate detection ensures clean data.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>Pipeline Tracking</h3>
+                        <p>Visualize your entire sales pipeline with drag-and-drop deal stages. Customize 5 default stages or create your own. Revenue forecasting updates automatically as deals progress.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>Email Integration</h3>
+                        <p>Two-way sync with Gmail and Outlook. Emails automatically logged to contact timeline. Send tracked emails directly from CRM. Templates save 30+ minutes daily.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>Team Collaboration</h3>
+                        <p>Share contacts, deals, and tasks across your team. @mention colleagues in notes. Activity feed shows real-time updates. Role-based permissions control access.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>Mobile Apps</h3>
+                        <p>Native iOS and Android apps with offline mode. Update deals, log calls, and check tasks on the go. Push notifications for deal updates and task reminders.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>Reporting</h3>
+                        <p>Pre-built dashboards track sales velocity, win rates, and pipeline health. Custom reports filter by date, team, product, or deal stage. Export to PDF or CSV.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="pricing">
+                <h2>Pricing</h2>
+                <p>
+                    Choose the plan that fits your team size and needs.
+                    All plans include core CRM features, unlimited contacts, and email integration.
+                    Upgrade or downgrade anytime with no long-term contracts required.
+                </p>
+                <div class="pricing">
+                    <div class="pricing-tier">
+                        <h3>Free Plan</h3>
+                        <div class="price">$0</div>
+                        <p>per month</p>
+                        <ul>
+                            <li>Up to 5 users</li>
+                            <li>1,000 contacts</li>
+                            <li>Basic features</li>
+                            <li>Email support</li>
+                        </ul>
+                    </div>
+                    <div class="pricing-tier featured">
+                        <h3>Pro Plan</h3>
+                        <div class="price">$49</div>
+                        <p>per user per month</p>
+                        <ul>
+                            <li>Up to 25 users</li>
+                            <li>Unlimited contacts</li>
+                            <li>All features</li>
+                            <li>Priority support</li>
+                            <li>API access</li>
+                            <li>Custom fields</li>
+                        </ul>
+                    </div>
+                    <div class="pricing-tier">
+                        <h3>Enterprise Plan</h3>
+                        <div class="price">Custom</div>
+                        <p>contact us</p>
+                        <ul>
+                            <li>Unlimited users</li>
+                            <li>Unlimited contacts</li>
+                            <li>Premium support</li>
+                            <li>Custom integrations</li>
+                            <li>Dedicated account manager</li>
+                            <li>SLA guarantee</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="integrations">
+                <h2>Integrations</h2>
+                <p>
+                    Acme CRM connects with the tools your team already uses.
+                    Email integrations sync automatically. Calendar integration prevents double-booking.
+                    Slack integration notifies your team of important deal updates in real-time.
+                </p>
+                <ul>
+                    <li><strong>Gmail</strong> - Two-way email sync, send from CRM, automatic logging</li>
+                    <li><strong>Microsoft Outlook</strong> - Calendar sync, email integration, contact import</li>
+                    <li><strong>Slack</strong> - Deal notifications, team mentions, activity updates</li>
+                    <li><strong>Google Calendar</strong> - Meeting sync, availability checking</li>
+                    <li><strong>Zapier</strong> - Connect 3,000+ apps via API</li>
+                </ul>
+                <p>
+                    Enterprise plans include custom integration development.
+                    Our API provides REST endpoints for contacts, deals, tasks, and activities.
+                    Webhook support enables real-time data synchronization with your internal systems.
+                </p>
+            </section>
+
+            <section id="reviews">
+                <h2>Customer Reviews</h2>
+                <div class="review">
+                    <div class="rating">★★★★★</div>
+                    <p><strong>Mike Johnson</strong> - March 1, 2024</p>
+                    <p>
+                        Switched from Salesforce and couldn't be happier. Acme CRM is 10x easier to use and our team actually adopted it within 2 weeks.
+                        Deal visibility improved dramatically. We closed 8 deals in the first month that had been stalled for 3+ months in our old system.
+                    </p>
+                </div>
+                <div class="review">
+                    <div class="rating">★★★★★</div>
+                    <p><strong>Sarah Chen</strong> - February 15, 2024</p>
+                    <p>
+                        Perfect for our 12-person sales team. Gmail integration works flawlessly—every email automatically appears in contact timelines.
+                        Pipeline tracking gives us complete visibility into our $2M+ pipeline. ROI was positive within 3 months based on time saved alone.
+                    </p>
+                </div>
+            </section>
+
+            <section id="use-cases">
+                <h2>Who Uses Acme CRM?</h2>
+                <p>
+                    Sales teams across industries rely on Acme CRM to manage customer relationships and close more deals.
+                    Our customers range from 3-person startups to 50-person established businesses in software, consulting, manufacturing, and professional services.
+                </p>
+                <h3>B2B SaaS Companies</h3>
+                <p>
+                    Track long sales cycles (3-12 months) with multiple touchpoints. Manage trials, demos, and multi-stakeholder approvals.
+                    Integration with product analytics shows customer usage data alongside sales information.
+                </p>
+                <h3>Professional Services</h3>
+                <p>
+                    Consultants, agencies, and law firms use Acme CRM to manage client acquisition.
+                    Project-based sales require tracking proposals, contracts, and scope changes. Task management ensures follow-up doesn't slip through cracks.
+                </p>
+                <h3>B2B Manufacturing</h3>
+                <p>
+                    Manufacturers with complex products track quotes, specifications, and regulatory requirements in custom fields.
+                    Long approval cycles (6-18 months) require detailed activity logging and pipeline forecasting.
+                </p>
+            </section>
+
+            <section id="getting-started">
+                <h2>Getting Started</h2>
+                <p>
+                    Start using Acme CRM in three simple steps. No credit card required for free trial.
+                    Import your existing contacts from CSV, Gmail, or other CRM in minutes. Our guided setup takes 15 minutes from signup to first deal created.
+                </p>
+                <ol>
+                    <li><strong>Sign up</strong> - Create your free account at <a href="https://acme.com/signup">acme.com/signup</a></li>
+                    <li><strong>Import contacts</strong> - Upload CSV or connect Gmail/Outlook for automatic import</li>
+                    <li><strong>Create your first deal</strong> - Add a deal, set stage, assign to team member, set close date</li>
+                </ol>
+                <p>
+                    Our support team provides live chat onboarding for Pro and Enterprise customers.
+                    Video tutorials cover common workflows: adding contacts, creating deals, customizing pipeline stages, and generating reports.
+                    Most teams are fully productive within 1 week.
+                </p>
+            </section>
+
+            <aside style="background: #f0f8ff; padding: 20px; margin: 30px 0; border-left: 4px solid #007bff;">
+                <h3>See Related Products</h3>
+                <ul>
+                    <li><a href="/products/project-management">Acme Project Manager</a> - Track projects and tasks alongside customer relationships</li>
+                    <li><a href="/products/marketing-automation">Acme Marketing</a> - Nurture leads before they reach sales</li>
+                    <li><a href="/case-studies/saas">Case Study: How TechStartup increased deals 120% with Acme CRM</a></li>
+                </ul>
+            </aside>
+        </article>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Acme Corp. All rights reserved.</p>
+        <p>
+            <a href="/privacy">Privacy Policy</a> |
+            <a href="/terms">Terms of Service</a> |
+            <a href="/contact">Contact Us</a>
+        </p>
+    </footer>
+</body>
+</html>

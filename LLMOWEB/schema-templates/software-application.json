@@ -1,0 +1,195 @@
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "@id": "https://your-site.com/products/your-product#product",
+
+  "_comment_tier1": "=== TIER 1: ESSENTIAL PROPERTIES (Always include) ===",
+
+  "name": "Your Product Name",
+  "applicationCategory": "BusinessApplication",
+  "_comment_categories": "Common: BusinessApplication, DeveloperApplication, DesignApplication, EducationalApplication, EntertainmentApplication, LifestyleApplication, MultimediaApplication",
+
+  "description": "Clear, factual description of what your software does and who it's for (150-200 characters)",
+
+  "url": "https://your-site.com/products/your-product",
+
+  "offers": {
+    "@type": "Offer",
+    "price": "49.00",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock",
+    "url": "https://your-site.com/pricing"
+  },
+
+  "_comment_multiple_tiers": "For multiple pricing tiers, use array",
+  "offers_multiple_example": [
+    {
+      "@type": "Offer",
+      "name": "Free Plan",
+      "price": "0",
+      "priceCurrency": "USD",
+      "description": "Up to 5 users, basic features"
+    },
+    {
+      "@type": "Offer",
+      "name": "Pro Plan",
+      "price": "49.00",
+      "priceCurrency": "USD",
+      "priceSpecification": {
+        "@type": "UnitPriceSpecification",
+        "price": "49.00",
+        "priceCurrency": "USD",
+        "billingIncrement": "1",
+        "billingDuration": {
+          "@type": "QuantitativeValue",
+          "value": "1",
+          "unitCode": "MON"
+        }
+      },
+      "description": "Up to 25 users, all features"
+    },
+    {
+      "@type": "Offer",
+      "name": "Enterprise Plan",
+      "price": "Contact for quote",
+      "priceCurrency": "USD",
+      "description": "Unlimited users, premium support, custom integration"
+    }
+  ],
+
+  "_comment_tier2": "=== TIER 2: IMPORTANT PROPERTIES (Include when available) ===",
+
+  "featureList": [
+    "Contact Management",
+    "Sales Pipeline Tracking",
+    "Email Integration (Gmail, Outlook)",
+    "Task Management",
+    "Custom Reports and Dashboards",
+    "Mobile Apps (iOS, Android)",
+    "API Access",
+    "Team Collaboration Tools"
+  ],
+
+  "screenshot": [
+    {
+      "@type": "ImageObject",
+      "url": "https://your-site.com/screenshots/dashboard.png",
+      "caption": "Main dashboard showing pipeline view"
+    },
+    {
+      "@type": "ImageObject",
+      "url": "https://your-site.com/screenshots/contacts.png",
+      "caption": "Contact management interface"
+    }
+  ],
+
+  "operatingSystem": "Web-based, iOS, Android",
+  "_comment_os_specific": "Or be specific: 'Windows 10+', 'macOS 11+', 'iOS 15+', 'Android 10+'",
+
+  "softwareVersion": "3.2.1",
+  "releaseNotes": "https://your-site.com/changelog",
+  "datePublished": "2020-06-15",
+  "dateModified": "2024-03-10",
+
+  "provider": {
+    "@type": "Organization",
+    "@id": "https://your-site.com/#organization",
+    "name": "Your Company Name"
+  },
+
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.7",
+    "ratingCount": "342",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+
+  "review": [
+    {
+      "@type": "Review",
+      "author": {
+        "@type": "Person",
+        "name": "John Smith"
+      },
+      "datePublished": "2024-02-15",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5"
+      },
+      "reviewBody": "Excellent CRM for small teams. Easy to use and great customer support."
+    }
+  ],
+
+  "_comment_tier3": "=== TIER 3: NICE-TO-HAVE PROPERTIES (Optional enhancements) ===",
+
+  "applicationSubCategory": "Customer Relationship Management",
+
+  "downloadUrl": "https://your-site.com/download",
+  "installUrl": "https://your-site.com/signup",
+  "softwareHelp": "https://help.your-site.com",
+
+  "browserRequirements": "Chrome 90+, Firefox 88+, Safari 14+, Edge 90+",
+
+  "softwareRequirements": "Internet connection required",
+
+  "permissions": "Requires: Contacts access (optional), Email integration (optional)",
+
+  "fileSize": "45MB",
+
+  "memoryRequirements": "4GB RAM recommended",
+
+  "storageRequirements": "100MB disk space",
+
+  "applicationSuite": "Acme Business Suite",
+
+  "isRelatedTo": [
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://your-site.com/products/project-management#product",
+      "name": "Acme Project Manager"
+    }
+  ],
+
+  "isAccessoryOf": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "Gmail",
+      "url": "https://mail.google.com"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "Slack",
+      "url": "https://slack.com"
+    }
+  ],
+
+  "serviceType": "SaaS",
+
+  "audience": {
+    "@type": "BusinessAudience",
+    "audienceType": "Small to medium businesses, Sales teams, Customer success teams"
+  },
+
+  "about": [
+    {
+      "@type": "Thing",
+      "name": "Customer Relationship Management"
+    },
+    {
+      "@type": "Thing",
+      "name": "Sales Automation"
+    }
+  ],
+
+  "_usage_instructions": {
+    "required_tier1": ["name", "applicationCategory", "description", "url", "offers"],
+    "recommended_tier2": ["featureList", "screenshot", "operatingSystem", "provider", "aggregateRating"],
+    "optional_tier3": ["applicationSubCategory", "downloadUrl", "softwareHelp", "isRelatedTo"],
+    "pricing_note": "Use offers array for multiple pricing tiers (Free, Pro, Enterprise)",
+    "features_note": "List 5-15 key features in featureList",
+    "integration_note": "Use isAccessoryOf to list integrations (Gmail, Slack, etc.)",
+    "remove_this_section": "Delete this _usage_instructions object and all _comment fields before using"
+  }
+}

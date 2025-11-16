@@ -1,0 +1,99 @@
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "@id": "https://your-site.com/faq#faqpage",
+
+  "_comment_tier1": "=== TIER 1: ESSENTIAL PROPERTIES (Always include) ===",
+
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is your return policy?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We offer a 30-day money-back guarantee on all purchases. If you're not satisfied, contact our support team for a full refund. No questions asked. Products must be in original condition with all packaging and accessories."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does shipping take?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Standard shipping takes 5-7 business days within the US. Express shipping (2-3 business days) and overnight shipping are available at checkout. International shipping times vary by destination (typically 10-21 business days)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you offer technical support?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Free plan customers get email support (24-48 hour response). Pro customers get priority email support (12 hour response) plus live chat (9am-5pm PT). Enterprise customers get dedicated support with phone access and 4-hour SLA."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I upgrade or downgrade my plan?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, anytime. Upgrades take effect immediately. Downgrades take effect at the end of your current billing cycle. You'll receive prorated credits for unused time when upgrading. No penalties for changing plans."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What payment methods do you accept?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We accept all major credit cards (Visa, Mastercard, American Express, Discover), PayPal, and ACH bank transfer for annual plans. Enterprise customers can request invoice billing with net-30 terms."
+      }
+    }
+  ],
+
+  "_comment_tier2": "=== TIER 2: IMPORTANT PROPERTIES (Include when available) ===",
+
+  "about": {
+    "@type": "Thing",
+    "name": "Product Usage and Policies"
+  },
+
+  "url": "https://your-site.com/faq",
+
+  "headline": "Frequently Asked Questions",
+
+  "description": "Common questions about our products, services, pricing, shipping, returns, and support",
+
+  "_comment_tier3": "=== TIER 3: NICE-TO-HAVE PROPERTIES (Optional enhancements) ===",
+
+  "datePublished": "2024-01-15",
+  "dateModified": "2024-03-10",
+
+  "author": {
+    "@type": "Organization",
+    "@id": "https://your-site.com/#organization"
+  },
+
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://your-site.com/#organization"
+  },
+
+  "_usage_instructions": {
+    "minimum_questions": "Include at least 5-10 FAQ items",
+    "answer_format": "Answers should be 2-5 sentences, factual and specific",
+    "question_types": [
+      "Pricing and billing questions",
+      "Product features and capabilities",
+      "Technical support and help",
+      "Shipping and returns",
+      "Account and security",
+      "Integration and compatibility"
+    ],
+    "best_practices": [
+      "Use natural question phrasing (how customers ask)",
+      "Provide specific, actionable answers",
+      "Include numbers and timeframes",
+      "Link to detailed docs when appropriate",
+      "Update regularly based on customer questions"
+    ],
+    "remove_this_section": "Delete this _usage_instructions object and all _comment fields before using"
+  }
+}

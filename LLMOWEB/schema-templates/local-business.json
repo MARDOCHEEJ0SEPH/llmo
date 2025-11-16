@@ -1,0 +1,238 @@
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "@id": "https://your-site.com/#localbusiness",
+
+  "_comment_types": "Use specific types: Attorney, Dentist, Physician, Accountant, RealEstateAgent, etc. or generic ProfessionalService/LocalBusiness",
+
+  "_comment_tier1": "=== TIER 1: ESSENTIAL PROPERTIES (Always include) ===",
+
+  "name": "Acme Law Firm",
+  "legalName": "Acme Law Firm LLP",
+
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "456 Main Street, Suite 200",
+    "addressLocality": "Austin",
+    "addressRegion": "TX",
+    "postalCode": "78701",
+    "addressCountry": "US"
+  },
+
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "30.2672",
+    "longitude": "-97.7431"
+  },
+
+  "telephone": "+1-512-555-0200",
+  "email": "info@acmelaw.com",
+  "url": "https://your-site.com",
+
+  "_comment_tier2": "=== TIER 2: IMPORTANT PROPERTIES (Include when available) ===",
+
+  "description": "Full-service law firm specializing in corporate law, intellectual property, employment law, and contract negotiation for businesses in Austin and Central Texas.",
+
+  "image": "https://your-site.com/images/office-exterior.jpg",
+
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://your-site.com/logo.png",
+    "width": "600",
+    "height": "60"
+  },
+
+  "priceRange": "$$$",
+  "_comment_price_range": "$ = inexpensive, $$ = moderate, $$$ = expensive, $$$$ = very expensive",
+
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      "opens": "09:00",
+      "closes": "17:00"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": "Saturday",
+      "opens": "10:00",
+      "closes": "14:00"
+    }
+  ],
+
+  "areaServed": [
+    {
+      "@type": "City",
+      "name": "Austin",
+      "sameAs": "https://en.wikipedia.org/wiki/Austin,_Texas"
+    },
+    {
+      "@type": "State",
+      "name": "Texas"
+    }
+  ],
+
+  "serviceArea": {
+    "@type": "GeoCircle",
+    "geoMidpoint": {
+      "@type": "GeoCoordinates",
+      "latitude": "30.2672",
+      "longitude": "-97.7431"
+    },
+    "geoRadius": "80000",
+    "_comment_radius": "Radius in meters (80km = 50 miles)"
+  },
+
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Legal Services",
+    "itemListElement": [
+      {
+        "@type": "OfferCatalog",
+        "name": "Corporate Law",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Business Formation",
+              "description": "LLC, S-Corp, C-Corp formation and structure"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Contract Review",
+              "description": "Commercial contract review and negotiation"
+            }
+          }
+        ]
+      },
+      {
+        "@type": "OfferCatalog",
+        "name": "Intellectual Property",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Trademark Registration",
+              "description": "USPTO trademark search and registration"
+            }
+          }
+        ]
+      }
+    ]
+  },
+
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "reviewCount": "127",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+
+  "review": [
+    {
+      "@type": "Review",
+      "author": {
+        "@type": "Person",
+        "name": "John Martinez"
+      },
+      "datePublished": "2024-02-20",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5"
+      },
+      "reviewBody": "Excellent corporate counsel. Helped us navigate complex contract negotiations and protected our interests throughout. Highly responsive and knowledgeable."
+    }
+  ],
+
+  "_comment_tier3": "=== TIER 3: NICE-TO-HAVE PROPERTIES (Optional enhancements) ===",
+
+  "foundingDate": "2005-03-15",
+
+  "founder": [
+    {
+      "@type": "Person",
+      "@id": "https://your-site.com/attorneys/jane-smith#person",
+      "name": "Jane Smith"
+    }
+  ],
+
+  "employee": [
+    {
+      "@type": "Person",
+      "@id": "https://your-site.com/attorneys/jane-smith#person"
+    },
+    {
+      "@type": "Person",
+      "@id": "https://your-site.com/attorneys/john-doe#person"
+    }
+  ],
+
+  "numberOfEmployees": {
+    "@type": "QuantitativeValue",
+    "value": 12
+  },
+
+  "sameAs": [
+    "https://www.linkedin.com/company/acme-law",
+    "https://www.facebook.com/acmelaw",
+    "https://twitter.com/acmelaw"
+  ],
+
+  "paymentAccepted": "Cash, Check, Credit Card, Wire Transfer",
+
+  "currenciesAccepted": "USD",
+
+  "knowsAbout": [
+    "Corporate Law",
+    "Intellectual Property",
+    "Employment Law",
+    "Contract Law",
+    "Business Litigation"
+  ],
+
+  "award": [
+    "Best Law Firm 2024 - Austin Business Journal",
+    "Top IP Law Firm - Texas Lawyer Magazine"
+  ],
+
+  "slogan": "Your trusted legal partner for business success",
+
+  "contactPoint": [
+    {
+      "@type": "ContactPoint",
+      "telephone": "+1-512-555-0200",
+      "contactType": "customer service",
+      "availableLanguage": ["en", "es"],
+      "hoursAvailable": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "09:00",
+        "closes": "17:00"
+      }
+    },
+    {
+      "@type": "ContactPoint",
+      "telephone": "+1-512-555-0201",
+      "contactType": "new client inquiries",
+      "availableLanguage": "en"
+    }
+  ],
+
+  "_usage_instructions": {
+    "required_tier1": ["name", "address", "geo", "telephone", "url"],
+    "recommended_tier2": ["description", "openingHoursSpecification", "areaServed", "priceRange", "aggregateRating"],
+    "optional_tier3": ["foundingDate", "employee", "sameAs", "knowsAbout", "award"],
+    "type_selection": "Use most specific type: Attorney, Dentist, Physician, Accountant, etc.",
+    "local_seo": "Include geo coordinates for better local search visibility",
+    "multi_location": "For multiple locations, create separate LocalBusiness entity for each",
+    "service_catalog": "List all services you offer for comprehensive coverage",
+    "reviews": "Include real customer reviews to build trust",
+    "remove_this_section": "Delete this _usage_instructions object and all _comment fields before using"
+  }
+}

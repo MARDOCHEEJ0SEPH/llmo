@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semantic Heading Hierarchy Example - LLMO Best Practices</title>
+    <style>
+        body { font-family: sans-serif; max-width: 900px; margin: 40px auto; padding: 0 20px; line-height: 1.6; }
+        h1 { font-size: 2.5em; border-bottom: 3px solid #333; padding-bottom: 10px; }
+        h2 { font-size: 2em; margin-top: 40px; border-bottom: 2px solid #666; padding-bottom: 8px; }
+        h3 { font-size: 1.5em; margin-top: 30px; color: #444; }
+        h4 { font-size: 1.2em; margin-top: 20px; color: #666; }
+        .good { background: #d4edda; padding: 20px; border-left: 4px solid #28a745; margin: 20px 0; }
+        .bad { background: #f8d7da; padding: 20px; border-left: 4px solid #dc3545; margin: 20px 0; }
+        code { background: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: monospace; }
+    </style>
+</head>
+<body>
+
+<!-- ============================================
+     PROPER HEADING HIERARCHY EXAMPLE
+     This demonstrates LLMO best practices
+     ============================================ -->
+
+<header>
+    <h1>Complete Guide to Email Marketing for SaaS Companies</h1>
+    <p>Learn proven strategies to increase trial-to-paid conversions by 40% through targeted email campaigns, behavioral triggers, and personalized onboarding sequences.</p>
+</header>
+
+<main>
+    <article>
+        <!-- ONE H1 PER PAGE -->
+        <!-- H1 is reserved for main page title only -->
+
+        <section>
+            <h2>Why Email Marketing Matters for SaaS Growth</h2>
+            <p>
+                Email marketing drives 30-40% of trial-to-paid conversions for successful SaaS companies.
+                Targeted campaigns during the 14-30 day trial period increase conversion rates from 2% to 8-12%.
+                Behavioral triggers based on user actions (feature adoption, usage frequency) deliver 5x higher engagement than generic broadcasts.
+            </p>
+
+            <h3>Key Email Marketing Metrics</h3>
+            <p>
+                Track four critical metrics to optimize email performance: open rates (20-25% is good), click-through rates (3-5% target),
+                trial-to-paid conversion rates (8-12% target), and revenue per email sent ($0.50-$2.00 for SaaS).
+            </p>
+
+            <h3>Email vs. Other Marketing Channels</h3>
+            <p>
+                Email delivers $42 ROI for every $1 spent (highest of all channels). Compared to paid search ($2-$8 ROI) and social media ($4-$10 ROI),
+                email provides superior cost-effectiveness plus direct user communication during critical trial periods.
+            </p>
+        </section>
+
+        <section>
+            <h2>Onboarding Email Sequences</h2>
+            <p>
+                Onboarding sequences guide new users from signup to activation to paid conversion.
+                Well-structured sequences take users through 5-7 key features over 7-14 days with specific goals for each email.
+            </p>
+
+            <h3>Day 1: Welcome and Quick Win</h3>
+            <p>
+                First email arrives within 5 minutes of signup. Goal: Get users to complete one valuable action in under 10 minutes.
+                Include direct link to primary feature (not generic dashboard). Provide video tutorial (2-3 minutes maximum) showing exact steps.
+            </p>
+
+            <h4>Subject Line Best Practices</h4>
+            <p>
+                Use personalization tokens (first name, company name) to increase open rates by 20-30%.
+                Keep subject lines under 50 characters for mobile display. Test urgency ("Get started in 5 minutes") vs. value ("Your account is ready").
+            </p>
+
+            <h4>CTA Design</h4>
+            <p>
+                Single, prominent call-to-action button colored distinctly from background. Use action-oriented text ("Import your data now" not "Click here").
+                Position CTA above the fold and repeat after instructions for longer emails.
+            </p>
+
+            <h3>Day 3: Feature Discovery</h3>
+            <p>
+                Third email introduces next most-valuable feature based on user's role or industry.
+                Include specific use case: "Sales managers use this to forecast quarterly revenue."
+                Provide step-by-step guide with screenshots or GIF demonstrating feature setup.
+            </p>
+
+            <h3>Day 7: Social Proof and Engagement Check</h3>
+            <p>
+                Seventh email combines feature education with customer testimonials.
+                "1,200 companies like yours increased close rates by 35% using this feature."
+                Include brief case study (100-150 words) with specific metrics from similar company.
+            </p>
+        </section>
+
+        <section>
+            <h2>Behavioral Trigger Campaigns</h2>
+            <p>
+                Trigger emails based on specific user actions (or inaction) deliver 8x higher engagement than scheduled broadcasts.
+                Monitor 10-12 key user behaviors and automate targeted responses within 1-4 hours of trigger event.
+            </p>
+
+            <h3>Feature Adoption Triggers</h3>
+            <p>
+                Send congratulatory email when users complete important milestones (first project created, first team member invited, first report generated).
+                Include next logical step: "You created your first project! Now import contacts to start tracking."
+            </p>
+
+            <h4>Abandoned Setup Trigger</h4>
+            <p>
+                User starts critical setup process (integration, import, configuration) but doesn't complete within 24 hours.
+                Email offers direct help: "Need help connecting Gmail? Our team can set it up in 10 minutes" with calendar link for screen-share assistance.
+            </p>
+
+            <h3>Inactivity Triggers</h3>
+            <p>
+                Three-tier inactivity campaign targets users who haven't logged in recently.
+                Day 3 inactive: "What you're missing" email highlighting new features or team activity.
+                Day 7 inactive: Value reminder with specific ROI metrics from active users.
+                Day 14 inactive: Last-chance offer for extended trial or customer success consultation.
+            </p>
+        </section>
+
+        <section>
+            <h2>Conversion-Focused Campaigns</h2>
+            <p>
+                Final 7 days of trial period receive focused conversion messaging.
+                Combination of value reinforcement, urgency creation, and objection handling drives trial-to-paid conversions from 5% to 12-15%.
+            </p>
+
+            <h3>7 Days Before Trial Ends</h3>
+            <p>
+                First conversion email emphasizes value already gained: "You saved 12 hours last week using automated reporting."
+                Include specific usage data (personalized per user): tasks completed, time saved, team collaboration stats.
+                Soft CTA: "Ready to keep going? Choose your plan" with pricing comparison table.
+            </p>
+
+            <h3>3 Days Before Trial Ends</h3>
+            <p>
+                Address common objections directly: pricing concerns, feature gaps, migration effort from current tools.
+                "Switching from [competitor]? Here's how [your product] compares" with side-by-side feature matrix.
+                Offer concierge onboarding for annual plans: "Our team will migrate your data and train your team."
+            </p>
+
+            <h3>Final Day of Trial</h3>
+            <p>
+                Urgency-driven email with clear deadline: "Trial ends tonight at midnight."
+                Final incentive: "Subscribe today, get 2 months free" or "Annual plan saves $588/year."
+                One-click subscription button pre-filled with user's account details.
+                Reassurance: "Cancel anytime. 30-day money-back guarantee."
+            </p>
+        </section>
+
+        <section>
+            <h2>Email Copy Best Practices</h2>
+            <p>
+                Email copy quality directly impacts open rates, click-through rates, and conversions.
+                Apply LLMO content principles: 15-25 word sentences, 1-2 facts per sentence, active voice, and specific numbers.
+            </p>
+
+            <h3>Subject Line Optimization</h3>
+            <p>
+                Test 3-5 subject line variants for each campaign type.
+                Winners typically combine personalization, specificity, and clear benefit.
+                "John, here's how to import 500 contacts in 5 minutes" outperforms "Contact import tutorial."
+            </p>
+
+            <h3>Body Copy Structure</h3>
+            <p>
+                Opening paragraph states clear purpose in 2-3 sentences.
+                Body delivers on promise with specific steps, screenshots, or data.
+                Closing paragraph includes single clear CTA and reinforces value.
+                Total email length: 100-250 words for onboarding, 200-400 words for conversion campaigns.
+            </p>
+
+            <h3>Personalization Tokens</h3>
+            <p>
+                Beyond first name, use advanced tokens: company name, role, industry, current plan, features used, team size.
+                "SaaS companies with 10-person sales teams increase pipeline by 40%" resonates more than generic claims.
+                Dynamic content blocks show role-specific use cases (sales vs. marketing vs. support).
+            </p>
+        </section>
+
+        <section>
+            <h2>Testing and Optimization</h2>
+            <p>
+                Continuous A/B testing improves conversion rates 2-3% monthly (compounding to 30-40% annual improvement).
+                Test one variable at a time with statistical significance (minimum 100 conversions per variant).
+            </p>
+
+            <h3>What to Test</h3>
+            <p>
+                Priority test areas: subject lines (highest impact), send time (2-4% difference), email length (short vs. detailed),
+                CTA placement (above fold vs. multiple CTAs), personalization level (basic vs. advanced).
+            </p>
+
+            <h3>How to Analyze Results</h3>
+            <p>
+                Track complete funnel: sent → opened → clicked → converted → retained.
+                Email with highest open rate might have lowest conversion rate.
+                Optimize for final goal (paid conversions, revenue) not intermediary metrics (open rates alone).
+            </p>
+        </section>
+    </article>
+</main>
+
+<!-- ============================================
+     ANTI-PATTERNS TO AVOID
+     ============================================ -->
+
+<aside style="margin-top: 60px; padding: 30px; background: #f9f9f9; border-left: 5px solid #dc3545;">
+    <h2>Common Heading Hierarchy Mistakes (DON'T DO THIS)</h2>
+
+    <div class="bad">
+        <strong>❌ BAD: Skipping Heading Levels</strong>
+        <code>&lt;h1&gt;Page Title&lt;/h1&gt;<br>
+        &lt;h3&gt;Subsection&lt;/h3&gt; &lt;!-- WRONG: Skipped H2 --&gt;</code>
+        <p>Never skip from H1 to H3. Always use sequential hierarchy: H1 → H2 → H3 → H4</p>
+    </div>
+
+    <div class="bad">
+        <strong>❌ BAD: Multiple H1 Tags</strong>
+        <code>&lt;h1&gt;Main Title&lt;/h1&gt;<br>
+        &lt;h1&gt;Another Title&lt;/h1&gt; &lt;!-- WRONG: Only one H1 per page --&gt;</code>
+        <p>Use only ONE H1 per page for the main page title. Use H2 for major sections.</p>
+    </div>
+
+    <div class="bad">
+        <strong>❌ BAD: Generic Headings</strong>
+        <code>&lt;h2&gt;Introduction&lt;/h2&gt; &lt;!-- Too generic --&gt;<br>
+        &lt;h2&gt;Overview&lt;/h2&gt; &lt;!-- Not descriptive --&gt;</code>
+        <p>Use descriptive headings that convey actual topic: "Why Email Marketing Drives SaaS Growth"</p>
+    </div>
+
+    <div class="bad">
+        <strong>❌ BAD: Using Headings for Styling</strong>
+        <code>&lt;h4&gt;Small text here&lt;/h4&gt; &lt;!-- WRONG: Using H4 just for smaller font --&gt;</code>
+        <p>Don't choose heading level based on desired font size. Use CSS for styling. Headings are for structure.</p>
+    </div>
+</aside>
+
+<!-- ============================================
+     CORRECT PATTERNS
+     ============================================ -->
+
+<aside style="margin-top: 30px; padding: 30px; background: #f9f9f9; border-left: 5px solid #28a745;">
+    <h2>Proper Heading Hierarchy (GOOD EXAMPLES)</h2>
+
+    <div class="good">
+        <strong>✓ GOOD: Sequential Hierarchy</strong>
+        <pre><code>&lt;h1&gt;Complete Guide to Email Marketing&lt;/h1&gt;
+&lt;h2&gt;Onboarding Email Sequences&lt;/h2&gt;
+  &lt;h3&gt;Day 1: Welcome and Quick Win&lt;/h3&gt;
+    &lt;h4&gt;Subject Line Best Practices&lt;/h4&gt;
+    &lt;h4&gt;CTA Design&lt;/h4&gt;
+  &lt;h3&gt;Day 3: Feature Discovery&lt;/h3&gt;
+&lt;h2&gt;Behavioral Trigger Campaigns&lt;/h2&gt;</code></pre>
+        <p>Perfect hierarchy: H1 → H2 → H3 → H4 with logical parent-child relationships</p>
+    </div>
+
+    <div class="good">
+        <strong>✓ GOOD: Descriptive Headings</strong>
+        <code>&lt;h2&gt;Why Email Marketing Matters for SaaS Growth&lt;/h2&gt;<br>
+        &lt;h3&gt;Key Email Marketing Metrics&lt;/h3&gt;</code>
+        <p>Specific, informative headings that tell readers (and LLMs) exactly what the section covers</p>
+    </div>
+
+    <div class="good">
+        <strong>✓ GOOD: Heading Outline Creates Document Structure</strong>
+        <p>Your heading hierarchy should create a logical table of contents:</p>
+        <ul>
+            <li>Complete Guide to Email Marketing (H1)</li>
+            <li style="margin-left: 20px;">→ Why Email Marketing Matters (H2)</li>
+            <li style="margin-left: 40px;">→ Key Email Marketing Metrics (H3)</li>
+            <li style="margin-left: 40px;">→ Email vs. Other Channels (H3)</li>
+            <li style="margin-left: 20px;">→ Onboarding Email Sequences (H2)</li>
+            <li style="margin-left: 40px;">→ Day 1: Welcome (H3)</li>
+            <li style="margin-left: 60px;">→ Subject Line Best Practices (H4)</li>
+        </ul>
+    </div>
+</aside>
+
+<footer style="margin-top: 60px; padding-top: 20px; border-top: 2px solid #ddd;">
+    <p><small>This example demonstrates proper semantic heading hierarchy for LLMO optimization. For more examples, see LLMOWEB/html-examples/</small></p>
+</footer>
+
+</body>
+</html>

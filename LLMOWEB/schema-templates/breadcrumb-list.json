@@ -1,0 +1,49 @@
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+
+  "_comment": "Breadcrumbs show navigation hierarchy and page location",
+
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://your-site.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Products",
+      "item": "https://your-site.com/products"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Software",
+      "item": "https://your-site.com/products/software"
+    },
+    {
+      "@type": "ListItem",
+      "position": 4,
+      "name": "Product Name",
+      "item": "https://your-site.com/products/software/product-name"
+    }
+  ],
+
+  "_usage_instructions": {
+    "minimum_items": "At least 2 items (Home + Current Page)",
+    "maximum_items": "Keep breadcrumbs shallow (3-5 levels ideal, max 7)",
+    "position": "Position must start at 1 and increment sequentially",
+    "current_page": "Last item is current page (can omit 'item' URL or include it)",
+    "url_format": "Use absolute URLs (https://...)",
+    "examples": {
+      "product_page": "Home › Products › Category › Subcategory › Product",
+      "blog_post": "Home › Blog › Category › Post Title",
+      "service_page": "Home › Services › Service Type › Service Name",
+      "team_member": "Home › About › Team › Person Name"
+    },
+    "html_integration": "Match breadcrumb schema to visible breadcrumbs on page",
+    "remove_this_section": "Delete this _usage_instructions object before using"
+  }
+}

@@ -1,0 +1,125 @@
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "@id": "https://your-site.com/guides/guide-name#howto",
+
+  "_comment_tier1": "=== TIER 1: ESSENTIAL PROPERTIES (Always include) ===",
+
+  "name": "How to Set Up Email Integration",
+
+  "description": "Step-by-step guide to connect Gmail or Outlook with your CRM for automatic email tracking and two-way sync",
+
+  "step": [
+    {
+      "@type": "HowToStep",
+      "name": "Connect Your Email Account",
+      "text": "Navigate to Settings > Integrations > Email. Click 'Connect Gmail' or 'Connect Outlook'. Authorize access to your email account by signing in and granting permissions.",
+      "position": 1,
+      "image": "https://your-site.com/images/guide/step1-connect.png"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Configure Sync Settings",
+      "text": "Choose which folders to sync (Inbox, Sent, specific labels). Select sync frequency (real-time, every 15 minutes, or hourly). Enable automatic contact creation for new email addresses.",
+      "position": 2,
+      "image": "https://your-site.com/images/guide/step2-configure.png"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Test the Integration",
+      "text": "Send a test email to a contact in your CRM. Verify the email appears in the contact's activity timeline within the configured sync time. Check that replies are tracked automatically.",
+      "position": 3,
+      "image": "https://your-site.com/images/guide/step3-test.png"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Enable Email Templates",
+      "text": "Go to Settings > Email Templates. Create templates for common emails (follow-up, introduction, meeting request). Use merge fields to personalize with contact data.",
+      "position": 4,
+      "image": "https://your-site.com/images/guide/step4-templates.png"
+    }
+  ],
+
+  "_comment_tier2": "=== TIER 2: IMPORTANT PROPERTIES (Include when available) ===",
+
+  "totalTime": "PT15M",
+  "_comment_duration": "ISO 8601 duration format: PT15M = 15 minutes, PT1H30M = 1.5 hours",
+
+  "tool": [
+    {
+      "@type": "HowToTool",
+      "name": "Gmail or Outlook Account"
+    },
+    {
+      "@type": "HowToTool",
+      "name": "Your CRM Account",
+      "url": "https://your-site.com/signup"
+    }
+  ],
+
+  "supply": [
+    {
+      "@type": "HowToSupply",
+      "name": "Email login credentials"
+    }
+  ],
+
+  "estimatedCost": {
+    "@type": "MonetaryAmount",
+    "value": "0",
+    "currency": "USD"
+  },
+
+  "image": "https://your-site.com/images/guides/email-integration-main.png",
+
+  "video": {
+    "@type": "VideoObject",
+    "name": "Email Integration Video Tutorial",
+    "description": "Watch how to set up email integration in 5 minutes",
+    "thumbnailUrl": "https://your-site.com/videos/thumbnails/email-integration.jpg",
+    "uploadDate": "2024-03-01",
+    "duration": "PT5M30S",
+    "contentUrl": "https://your-site.com/videos/email-integration.mp4"
+  },
+
+  "_comment_tier3": "=== TIER 3: NICE-TO-HAVE PROPERTIES (Optional enhancements) ===",
+
+  "url": "https://your-site.com/guides/email-integration",
+
+  "author": {
+    "@type": "Person",
+    "@id": "https://your-site.com/team/support-team#person",
+    "name": "Support Team"
+  },
+
+  "datePublished": "2024-01-10",
+  "dateModified": "2024-03-05",
+
+  "about": {
+    "@type": "Thing",
+    "name": "Email Integration"
+  },
+
+  "performTime": "PT10M",
+  "prepTime": "PT5M",
+
+  "yield": "Fully integrated email with CRM, automatic tracking, and two-way sync",
+
+  "_usage_instructions": {
+    "required_tier1": ["name", "description", "step (at least 3-5 steps)"],
+    "recommended_tier2": ["totalTime", "tool", "estimatedCost", "image"],
+    "optional_tier3": ["video", "author", "datePublished", "yield"],
+    "step_count": "Aim for 3-10 steps (if more, break into multiple guides)",
+    "step_detail": "Each step should be 2-4 sentences, actionable, specific",
+    "images": "Include screenshot/image for each step when possible",
+    "video": "Video tutorials significantly improve comprehension",
+    "use_cases": [
+      "Installation guides",
+      "Configuration tutorials",
+      "Feature walkthroughs",
+      "Troubleshooting procedures",
+      "Best practice guides"
+    ],
+    "remove_this_section": "Delete this _usage_instructions object and all _comment fields before using"
+  }
+}

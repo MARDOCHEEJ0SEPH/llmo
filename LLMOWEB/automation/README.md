@@ -2,20 +2,27 @@
 
 Programmatic schema generation, bulk processing, and automated maintenance.
 
-## 🤖 Available Tools
+## 🤖 Implemented Tools
 
-### Schema Generation
-- **database-to-schema.js** - Generate schema from database records
+### Database Integration (Production-Ready)
+- **postgres-integration-example.js** - PostgreSQL integration with connection pooling, complex joins
+- **mysql-integration-example.js** - MySQL integration with relational data handling
+- **mongodb-integration-example.js** - MongoDB integration for NoSQL databases
+- **database-to-schema-example.js** - Mock database example for learning
+
+### Bulk Operations
+- **bulk-schema-update.js** - Update properties across multiple schema files
+- **template-to-html-generator.js** - Generate complete HTML pages from schema templates
+
+### Additional Tool Ideas
+
+These tools demonstrate automation patterns but are not yet implemented:
+
 - **csv-to-schema.js** - Bulk import from CSV files
 - **api-to-schema.js** - Fetch data from REST API and generate schema
 - **cms-plugin-example.js** - CMS integration example
-
-### Bulk Operations
-- **bulk-generate.js** - Generate schema for hundreds/thousands of items
 - **batch-validator.js** - Validate large numbers of schema files
 - **update-propagation.js** - Update all instances when entity changes
-
-### Automation Workflows
 - **auto-update-prices.js** - Sync pricing from database daily
 - **auto-update-availability.js** - Real-time inventory sync
 - **scheduled-validation.js** - Weekly schema health checks
@@ -38,7 +45,268 @@ Programmatic schema generation, bulk processing, and automated maintenance.
 - ✅ Updates propagate automatically
 - ✅ 100 products = 5 minutes setup + instant generation
 
-## 🚀 Quick Start Examples
+## 🚀 Quick Start
+
+### PostgreSQL Integration
+
+Generate schemas from PostgreSQL database with production-ready connection pooling:
+
+```bash
+# Set environment variables
+export PGHOST=localhost
+export PGPORT=5432
+export PGUSER=your_user
+export PGPASSWORD=your_password
+export PGDATABASE=your_database
+
+# Generate all product schemas
+node postgres-integration-example.js --output-dir ./output
+
+# Incremental update (only changed products)
+node postgres-integration-example.js --output-dir ./output --since "2024-01-01"
+```
+
+**Features:**
+- ✅ Connection pooling for performance
+- ✅ Complex joins (products + brands + reviews + images + specifications)
+- ✅ Aggregate rating calculations
+- ✅ Incremental updates
+- ✅ Complete Organization schema generation
+
+### MySQL Integration
+
+Generate schemas from MySQL database:
+
+```bash
+# Set environment variables
+export MYSQL_HOST=localhost
+export MYSQL_PORT=3306
+export MYSQL_USER=your_user
+export MYSQL_PASSWORD=your_password
+export MYSQL_DATABASE=your_database
+
+# Generate all product schemas
+node mysql-integration-example.js --output-dir ./output
+
+# Incremental update
+node mysql-integration-example.js --output-dir ./output --since "2024-01-01 00:00:00"
+```
+
+**Required Tables:**
+- `products` - Product information
+- `brands` - Brand data
+- `reviews` - Customer reviews
+- `product_images` - Product images
+
+### MongoDB Integration
+
+Generate schemas from MongoDB collections:
+
+```bash
+# Set environment variables
+export MONGO_URI="mongodb://localhost:27017"
+export MONGO_DB="your_database"
+
+# Generate all schemas (products, articles, organization)
+node mongodb-integration-example.js --output-dir ./output --base-url https://your-site.com
+
+# Incremental update
+node mongodb-integration-example.js --output-dir ./output --since "2024-01-01"
+```
+
+**Supported Collections:**
+- `products` - Product documents
+- `articles` - Blog/news articles
+- `organizations` - Company information
+
+### Bulk Schema Update
+
+Update properties across many schema files at once:
+
+```bash
+# Update @context to new URL
+node bulk-schema-update.js --dir ./output --update-context https://schema.org
+
+# Add publisher to all schemas
+node bulk-schema-update.js --dir ./output --add-property publisher --value '{"@id":"https://site.com/#org"}'
+
+# Change domain across all URLs
+node bulk-schema-update.js --dir ./output --update-urls old-site.com new-site.com
+
+# Add missing required properties with placeholders
+node bulk-schema-update.js --dir ./output --add-missing-required
+
+# Preview changes without modifying files
+node bulk-schema-update.js --dir ./output --add-property author --value '{"@type":"Person","name":"John"}' --dry-run
+```
+
+**Operations:**
+- `--update-context <url>` - Update @context to new URL
+- `--add-property <name> --value <json>` - Add or update a property
+- `--remove-property <name>` - Remove a property
+- `--rename-property <old> <new>` - Rename a property
+- `--update-urls <old-domain> <new-domain>` - Update all URLs
+- `--add-missing-required` - Add missing required properties
+- `--dry-run` - Preview changes without modifying files
+
+### Template-to-HTML Generator
+
+Generate complete HTML pages from schema templates:
+
+```bash
+# Generate product page
+node template-to-html-generator.js --schema product.json --output product-page.html
+
+# Generate organization about page
+node template-to-html-generator.js --schema organization.json --output about.html
+
+# Generate article page
+node template-to-html-generator.js --schema article.json --output blog-post.html
+```
+
+**Supported Schema Types:**
+- `Product` - E-commerce product pages with pricing, reviews, specifications
+- `SoftwareApplication` - SaaS product pages with pricing tiers, features
+- `Organization` - About pages with contact info, social links
+- `Article` / `NewsArticle` - Blog posts with author, publish date
+- Generic fallback for other types
+
+## 📖 Detailed Tool Documentation
+
+### postgres-integration-example.js
+
+**Purpose:** Production-ready PostgreSQL integration with complex joins and connection pooling.
+
+**Database Requirements:**
+```sql
+-- Required tables structure
+CREATE TABLE products (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  description TEXT,
+  sku VARCHAR(100) UNIQUE,
+  price DECIMAL(10,2),
+  brand_id INT,
+  category_id INT,
+  created_at TIMESTAMP DEFAULT NOW(),
+  updated_at TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE brands (...);
+CREATE TABLE reviews (...);
+CREATE TABLE product_images (...);
+CREATE TABLE product_specifications (...);
+```
+
+**Usage:**
+```bash
+node postgres-integration-example.js [--output-dir ./output] [--since "2024-01-01"]
+```
+
+**Output:**
+- `organization.json` - Organization schema
+- `product-{sku}.json` - One file per product with complete data
+
+### mysql-integration-example.js
+
+**Purpose:** MySQL database integration with relational data handling.
+
+**Features:**
+- LEFT JOIN support for related tables
+- JSON aggregation not used (uses multiple queries)
+- Handles NULL values gracefully
+- Supports incremental updates via timestamp
+
+**Usage:**
+```bash
+node mysql-integration-example.js [--output-dir ./output] [--since "2024-01-01 00:00:00"]
+```
+
+### mongodb-integration-example.js
+
+**Purpose:** NoSQL MongoDB integration for document-based data.
+
+**Document Structure:**
+```javascript
+// products collection
+{
+  _id: ObjectId("..."),
+  name: "Product Name",
+  description: "Description",
+  price: 99.99,
+  brand: { name: "Brand", website: "https://..." },
+  reviews: [{ author: "...", rating: 5, text: "..." }],
+  specifications: { weight: "250g", ... },
+  images: [{ url: "...", alt: "..." }]
+}
+```
+
+**Advantages:**
+- Schema-less flexibility
+- Embedded documents reduce joins
+- Native array support
+
+**Usage:**
+```bash
+node mongodb-integration-example.js [--output-dir ./output] [--base-url https://site.com] [--since "2024-01-01"]
+```
+
+### bulk-schema-update.js
+
+**Purpose:** Update multiple schema files simultaneously.
+
+**Use Cases:**
+1. **Domain Migration:** Update all URLs when changing domains
+2. **Schema Standardization:** Add missing properties across all files
+3. **Property Renaming:** Rename properties consistently
+4. **Publisher Addition:** Add publisher reference to all articles
+
+**Examples:**
+```bash
+# Add breadcrumb to all product schemas
+node bulk-schema-update.js --dir ./products --add-property breadcrumb --value '{"@type":"BreadcrumbList",...}'
+
+# Remove deprecated property
+node bulk-schema-update.js --dir ./schemas --remove-property oldPropertyName
+
+# Update nested property
+node bulk-schema-update.js --dir ./schemas --add-property "offers.priceCurrency" --value '"EUR"'
+```
+
+**Safety Features:**
+- `--dry-run` mode to preview changes
+- Validation before writing
+- Preserves JSON formatting
+- Reports success/failure per file
+
+### template-to-html-generator.js
+
+**Purpose:** Generate complete, valid HTML pages from JSON-LD schemas.
+
+**Generated Pages Include:**
+- Valid HTML5 structure
+- Embedded JSON-LD schema (properly formatted)
+- Semantic HTML elements
+- Responsive CSS
+- Content extracted from schema properties
+
+**Templates:**
+- **Product:** Grid layout with images, pricing, reviews, specifications
+- **SoftwareApplication:** Hero section, pricing cards, features list, screenshots
+- **Organization:** About page with logo, contact info, social links
+- **Article:** Blog post layout with author, date, featured image
+
+**Customization:**
+Edit the generator functions to match your design system:
+```javascript
+// In template-to-html-generator.js
+function generateProductHTML(schema) {
+  // Modify HTML template here
+  return `<!DOCTYPE html>...`;
+}
+```
+
+## 📋 Detailed Examples
 
 ### Generate Product Schema from Database
 

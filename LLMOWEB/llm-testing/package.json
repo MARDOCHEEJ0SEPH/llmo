@@ -1,0 +1,36 @@
+{
+  "name": "llmo-llm-testing",
+  "version": "1.0.0",
+  "description": "LLM comprehension testing tools for LLMO-optimized content",
+  "scripts": {
+    "test:entities": "node entity-extraction-test.js",
+    "test:relationships": "node relationship-test.js",
+    "test:comprehension": "node comprehension-test.js",
+    "test:all": "npm run test:entities && npm run test:relationships && npm run test:comprehension"
+  },
+  "keywords": [
+    "llm",
+    "llmo",
+    "optimization",
+    "testing",
+    "comprehension",
+    "entity-extraction",
+    "ai"
+  ],
+  "author": "LLMO Project",
+  "license": "MIT",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.12",
+    "chalk": "^4.1.2"
+  },
+  "optionalDependencies": {
+    "openai": "^4.20.0",
+    "@anthropic-ai/sdk": "^0.9.1"
+  },
+  "devDependencies": {
+    "dotenv": "^16.3.1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

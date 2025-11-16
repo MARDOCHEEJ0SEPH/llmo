@@ -14,166 +14,35 @@ This chapter reveals the complete framework for progressive complexity—from de
 
 **Journalism's inverted pyramid + depth layers:**
 
-```
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    ESSENTIAL (Everyone)
-       ↓
-    IMPORTANT (Most People)
-       ↓
-    DETAILED (Interested Readers)
-       ↓
-    TECHNICAL (Experts Only)
-       ↓
-    EDGE CASES (Specialists)
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-```
+Structure content in 5 progressive layers:
+1. ESSENTIAL (Everyone) - Core concept in 1-2 sentences
+2. IMPORTANT (Most People) - Key benefits and basic usage
+3. DETAILED (Interested Readers) - Advanced configuration options
+4. TECHNICAL (Experts Only) - Architecture, APIs, technical specs
+5. EDGE CASES (Specialists) - Troubleshooting, corner cases
 
 **Example: Product feature explanation**
 
-```html
-<article itemscope itemtype="https://schema.org/TechArticle">
-  <h1 itemprop="headline">Email Integration</h1>
+**Layer 1 - Essential (beginner):**
+Start with clear abstract: "Email Integration syncs your email with Acme CRM, automatically creating contact records and logging communications." Brief explanation: "When you connect your Gmail or Outlook account, emails to/from contacts appear in their CRM records—no manual logging required."
 
-  <!-- Layer 1: Essential (everyone reads this) -->
-  <section class="complexity-essential" data-audience-level="beginner">
-    <p itemprop="abstract">
-      <strong>Email Integration syncs your email with Acme CRM</strong>,
-      automatically creating contact records and logging communications.
-    </p>
-    <p>
-      When you connect your Gmail or Outlook account, emails to/from contacts
-      appear in their CRM records—no manual logging required.
-    </p>
-  </section>
+**Layer 2 - Important (intermediate):**
+List key benefits (automatic contact creation, email history, tracking, two-way sync) and simple setup steps (Settings → Integrations → Connect Email → Authorize → Choose sync settings).
 
-  <!-- Layer 2: Important (most continue reading) -->
-  <section class="complexity-important" data-audience-level="intermediate">
-    <h2>Key Benefits</h2>
-    <ul>
-      <li>Automatic contact creation from email signatures</li>
-      <li>Email history visible in contact timeline</li>
-      <li>Track email opens and link clicks (Pro plan)</li>
-      <li>Two-way sync (send emails from CRM)</li>
-    </ul>
+**Layer 3 - Detailed (advanced):**
+Use expandable "Advanced Configuration" section covering email filtering rules (contact-based, domain filtering, folder-based, label-based) and two-way sync settings with configuration examples.
 
-    <h2>Getting Started</h2>
-    <ol>
-      <li>Go to Settings → Integrations</li>
-      <li>Click "Connect Email"</li>
-      <li>Authorize your Gmail/Outlook account</li>
-      <li>Choose sync settings (all emails or selective)</li>
-    </ol>
-  </section>
+**Layer 4 - Technical (expert):**
+Provide expandable "Technical Details & API" section explaining sync architecture (OAuth 2.0, Gmail API with Cloud Pub/Sub, Microsoft Graph API with webhooks, IMAP), API endpoints for programmatic integration, and rate limits/quotas table by plan.
 
-  <!-- Layer 3: Detailed (interested readers) -->
-  <details class="complexity-detailed">
-    <summary>Advanced Configuration</summary>
-    <section data-audience-level="advanced">
-      <h3>Email Filtering Rules</h3>
-      <p>
-        Control which emails sync to CRM using filters:
-      </p>
-      <ul>
-        <li><strong>Contact-based:</strong> Only sync emails with existing contacts</li>
-        <li><strong>Domain filtering:</strong> Sync only specific domains (e.g., @company.com)</li>
-        <li><strong>Folder-based:</strong> Sync only specific email folders</li>
-        <li><strong>Label-based (Gmail):</strong> Use labels to control sync</li>
-      </ul>
+**Layer 5 - Edge Cases (specialist):**
+Include expandable "Edge Cases & Troubleshooting" section addressing common issues like duplicate contact creation, sync delays, and missing emails with specific solutions.
 
-      <h3>Two-Way Sync Settings</h3>
-      <p>
-        Configure how CRM-sent emails appear in your inbox:
-      </p>
-      <pre><code>{
-  "sync_sent": true,
-  "sync_folder": "CRM Sent",
-  "bcc_to_crm": "crm@acmecorp.com"
-}</code></pre>
-    </section>
-  </details>
-
-  <!-- Layer 4: Technical (experts/developers) -->
-  <details class="complexity-technical">
-    <summary>Technical Details & API</summary>
-    <section data-audience-level="expert">
-      <h3>Email Sync Architecture</h3>
-      <p>
-        Email integration uses OAuth 2.0 for authentication and polls
-        email servers every 5 minutes via:
-      </p>
-      <ul>
-        <li><strong>Gmail:</strong> Gmail API (push notifications via Cloud Pub/Sub)</li>
-        <li><strong>Outlook:</strong> Microsoft Graph API (webhooks for real-time sync)</li>
-        <li><strong>IMAP:</strong> Standard IMAP protocol (manual configuration)</li>
-      </ul>
-
-      <h3>API Integration</h3>
-      <p>Programmatically create email associations:</p>
-      <pre><code>POST /api/v1/emails
-{
-  "contact_id": "c_12345",
-  "subject": "Meeting follow-up",
-  "body": "Email content...",
-  "sent_at": "2025-01-15T10:30:00Z",
-  "message_id": "msg_abc123"
-}</code></pre>
-
-      <h3>Rate Limits & Quotas</h3>
-      <table>
-        <tr>
-          <th>Plan</th>
-          <th>Emails Synced/Day</th>
-          <th>API Calls/Hour</th>
-        </tr>
-        <tr>
-          <td>Pro</td>
-          <td>10,000</td>
-          <td>1,000</td>
-        </tr>
-        <tr>
-          <td>Enterprise</td>
-          <td>Unlimited</td>
-          <td>10,000</td>
-        </tr>
-      </table>
-    </section>
-  </details>
-
-  <!-- Layer 5: Edge Cases (specialists) -->
-  <details class="complexity-edge-cases">
-    <summary>Edge Cases & Troubleshooting</summary>
-    <section data-audience-level="specialist">
-      <h3>Common Issues</h3>
-
-      <h4>Duplicate Contact Creation</h4>
-      <p>
-        If multiple email addresses exist for same person:
-      </p>
-      <pre><code>// Merge strategy configuration
-{
-  "duplicate_handling": "merge_by_domain",
-  "primary_email_priority": ["work", "personal", "other"]
-}</code></pre>
-
-      <h4>Large Mailbox Sync</h4>
-      <p>
-        For mailboxes with 100K+ emails:
-      </p>
-      <ul>
-        <li>Initial sync limited to last 90 days</li>
-        <li>Historical import via batch process (contact support)</li>
-        <li>Consider selective folder sync to reduce load</li>
-      </ul>
-
-      <h4>OAuth Token Expiration</h4>
-      <p>
-        Refresh tokens expire after 180 days of inactivity.
-        Re-authorization required if sync stops.
-      </p>
-    </section>
-  </details>
-</article>
-```
+**Implementation approach:**
+- Use TechArticle schema with educationalLevel property
+- Add data-audience-level attributes (beginner/intermediate/advanced/expert/specialist)
+- Use CSS classes for complexity layers (complexity-essential, complexity-important, etc.)
+- Wrap advanced sections in HTML details/summary for progressive disclosure
 
 **Benefits:**
 - Beginners read Layer 1-2, get complete picture
@@ -185,87 +54,21 @@ This chapter reveals the complete framework for progressive complexity—from de
 
 **Build complexity through structured progression:**
 
-**Level 1: What (Definition)**
-```
-Email Integration connects your email account to Acme CRM.
-```
+Use the 5-level "What → Why → How → Details → Internals" progression:
 
-**Level 2: Why (Value)**
-```
-Email Integration saves time by automatically logging all customer
-communications in one place, ensuring no conversation is lost.
-```
+**Level 1: What (Definition)** - Simple one-sentence definition: "Email Integration connects your email account to Acme CRM."
 
-**Level 3: How (Process)**
-```
-Email Integration works by authenticating your Gmail or Outlook account,
-then syncing emails every 5 minutes. Emails to/from contacts appear in
-their CRM timeline automatically.
-```
+**Level 2: Why (Value)** - Benefit statement: "Email Integration saves time by automatically logging all customer communications in one place, ensuring no conversation is lost."
 
-**Level 4: Details (Configuration)**
-```
-Email Integration supports advanced filtering: sync only specific folders,
-exclude certain domains, or use label-based filtering (Gmail). Configure
-in Settings → Integrations → Email → Advanced Settings.
-```
+**Level 3: How (Process)** - High-level process: "Email Integration works by authenticating your Gmail or Outlook account, then syncing emails every 5 minutes. Emails to/from contacts appear in their CRM timeline automatically."
 
-**Level 5: Internals (Architecture)**
-```
-Email Integration uses OAuth 2.0 authentication with Gmail API (push via
-Cloud Pub/Sub) or Microsoft Graph API (webhooks). Sync interval: 5 minutes
-(configurable to 1 minute for Enterprise). Rate limits: 10K emails/day (Pro),
-unlimited (Enterprise).
-```
+**Level 4: Details (Configuration)** - Specific features and settings: "Email Integration supports advanced filtering: sync only specific folders, exclude certain domains, or use label-based filtering (Gmail). Configure in Settings → Integrations → Email → Advanced Settings."
+
+**Level 5: Internals (Architecture)** - Technical implementation: "Email Integration uses OAuth 2.0 authentication with Gmail API (push via Cloud Pub/Sub) or Microsoft Graph API (webhooks). Sync interval: 5 minutes (configurable to 1 minute for Enterprise). Rate limits: 10K emails/day (Pro), unlimited (Enterprise)."
 
 **Implementation:**
 
-```html
-<section class="feature-explanation">
-  <h2>Email Integration</h2>
-
-  <div class="level-1-what">
-    <p class="definition">
-      <strong>Email Integration</strong> connects your email account to Acme CRM.
-    </p>
-  </div>
-
-  <div class="level-2-why">
-    <h3>Why Use It?</h3>
-    <p>
-      Automatically log all customer communications in one place, ensuring
-      no conversation is lost.
-    </p>
-  </div>
-
-  <div class="level-3-how">
-    <h3>How It Works</h3>
-    <p>
-      Authenticate your Gmail or Outlook account, then Acme CRM syncs emails
-      every 5 minutes. Emails to/from contacts appear in their timeline automatically.
-    </p>
-  </div>
-
-  <details class="level-4-details">
-    <summary>Advanced Configuration</summary>
-    <h3>Filtering Options</h3>
-    <p>
-      Sync only specific folders, exclude domains, or use label-based filtering (Gmail).
-      Configure in Settings → Integrations → Email → Advanced.
-    </p>
-  </details>
-
-  <details class="level-5-internals">
-    <summary>Technical Architecture</summary>
-    <h3>Integration Details</h3>
-    <p>
-      OAuth 2.0 authentication with Gmail API (Cloud Pub/Sub push) or
-      Microsoft Graph API (webhooks). Default sync: 5 minutes, Enterprise: 1 minute.
-      Rate limits: 10K emails/day (Pro), unlimited (Enterprise).
-    </p>
-  </details>
-</section>
-```
+Structure each feature explanation using semantic HTML sections with CSS classes indicating complexity level (level-1-what, level-2-why, level-3-how, level-4-details, level-5-internals). Each level builds on the previous, allowing readers to stop at their comfort level.
 
 ## Implementing Audience-Level Signals
 
@@ -273,133 +76,31 @@ unlimited (Enterprise).
 
 **educationalLevel property:**
 
-```json
-{
-  "@context": "https://schema.org",
-  "@type": "TechArticle",
-  "headline": "Email Integration Advanced Configuration",
-  "educationalLevel": "Advanced",
-
-  "audience": {
-    "@type": "EducationalAudience",
-    "educationalRole": "administrator",
-    "audienceType": "CRM administrators with technical background"
-  },
-
-  "teaches": {
-    "@type": "DefinedTerm",
-    "name": "Email Integration Configuration",
-    "description": "Advanced email sync settings and filtering rules"
-  },
-
-  "competencyRequired": [
-    "Understanding of email protocols (IMAP, OAuth)",
-    "Familiarity with Acme CRM basic settings",
-    "Experience with email filtering concepts"
-  ]
-}
-```
+Use TechArticle schema with educationalLevel ("Beginner"/"Intermediate"/"Advanced"), audience property specifying EducationalAudience (educationalRole: "administrator", audienceType: "CRM administrators with technical background"), teaches property defining what the content teaches, and competencyRequired array listing prerequisite knowledge areas (Understanding of email protocols, Familiarity with CRM basics, Experience with filtering concepts).
 
 **HowTo with difficulty:**
 
-```json
-{
-  "@type": "HowTo",
-  "name": "How to Configure Advanced Email Filtering",
-
-  "difficulty": "Advanced",
-
-  "estimatedCost": {
-    "@type": "MonetaryAmount",
-    "currency": "USD",
-    "value": "0"
-  },
-
-  "totalTime": "PT30M",
-
-  "tool": [
-    {
-      "@type": "HowToTool",
-      "name": "Acme CRM Pro account (or higher)"
-    },
-    {
-      "@type": "HowToTool",
-      "name": "Admin access to email filtering settings"
-    }
-  ],
-
-  "step": [...]
-}
-```
+Use HowTo schema with difficulty property ("Easy"/"Medium"/"Hard"/"Advanced"), estimatedCost (usually $0), totalTime in ISO 8601 duration format (PT30M for 30 minutes), tool array listing required tools (account type, access level), and step array with detailed instructions.
 
 **CreativeWork with complexity signals:**
 
-```json
-{
-  "@type": "Article",
-  "headline": "Understanding CRM Pipeline Management",
-
-  "articleSection": [
-    {
-      "@type": "Article",
-      "name": "Pipeline Basics",
-      "educationalLevel": "Beginner",
-      "wordCount": 500
-    },
-    {
-      "@type": "Article",
-      "name": "Advanced Pipeline Strategies",
-      "educationalLevel": "Advanced",
-      "wordCount": 1200
-    }
-  ]
-}
-```
+Use Article schema with articleSection array listing content sections and their complexity levels: "Pipeline Basics" (Beginner, 500 words), "Advanced Pipeline Strategies" (Advanced, 1200 words), etc.
 
 ### Visual Complexity Indicators
 
 **Difficulty badges:**
 
-```html
-<article class="content-item">
-  <header>
-    <h1>Advanced API Integration</h1>
-
-    <div class="metadata">
-      <span class="difficulty-badge difficulty-advanced"
-            data-level="advanced"
-            aria-label="Difficulty: Advanced">
-        <svg><!-- Icon --></svg>
-        Advanced
-      </span>
-
-      <span class="time-estimate">
-        <svg><!-- Clock icon --></svg>
-        45 minutes
-      </span>
-
-      <span class="prerequisites-indicator">
-        <svg><!-- Prerequisite icon --></svg>
-        Requires: <a href="#api-basics">API Basics</a>
-      </span>
-    </div>
-  </header>
-
-  <!-- Content -->
-</article>
-```
+Display difficulty badges with level indicator (Beginner/Intermediate/Advanced), time estimate (45 minutes), and prerequisite links. Use SVG icons for visual clarity and aria-label attributes for accessibility.
 
 **Color-coded sections:**
 
-```html
-<style>
-  .complexity-beginner { border-left: 4px solid #4CAF50; }
-  .complexity-intermediate { border-left: 4px solid #FF9800; }
-  .complexity-advanced { border-left: 4px solid #F44336; }
-  .complexity-expert { border-left: 4px solid #9C27B0; }
-</style>
+Use CSS border-left to visually distinguish complexity levels:
+- Beginner sections: Green border (#4CAF50)
+- Intermediate sections: Orange border (#FF9800)
+- Advanced sections: Red border (#F44336)
+- Expert sections: Purple border (#9C27B0)
 
-<section class="complexity-beginner">
+Apply these CSS classes to section elements to provide visual complexity cues.
   <h2>Getting Started</h2>
   <p>Beginner-friendly introduction...</p>
 </section>

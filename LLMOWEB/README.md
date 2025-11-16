@@ -55,11 +55,27 @@ Industry-specific implementations:
 
 ### [automation/](automation/)
 Programmatic schema generation:
-- Database-to-schema transformers
+- Database-to-schema transformers (PostgreSQL, MySQL, MongoDB)
+- Bulk schema update tools
+- Template-to-HTML generators
 - CMS integration examples
-- Bulk schema generation scripts
 - Automated update systems
-- Performance optimization
+
+### [llm-testing/](llm-testing/)
+LLM comprehension testing tools:
+- Entity extraction accuracy tests
+- Relationship understanding verification
+- General comprehension Q&A testing
+- Support for OpenAI GPT-4 and Anthropic Claude
+- Before/after optimization measurement
+
+### [technical-docs-examples/](technical-docs-examples/)
+LLMO applied to technical documentation:
+- System design documentation (databases, APIs, authentication)
+- Architecture patterns with schema markup
+- Code examples with high information density
+- Technical content optimization for LLM comprehension
+- Follows system design curriculum structure
 
 ## 🚀 Quick Start
 
@@ -91,16 +107,50 @@ cp complete-examples/saas-product-page.html my-product.html
 node validation/validate-page.js my-product.html
 ```
 
-### 3. Test LLM Comprehension
+### 3. Automate Schema Generation
+
+Generate schemas from your database:
+
+```bash
+# PostgreSQL integration
+export PGHOST=localhost PGUSER=user PGDATABASE=mydb
+node automation/postgres-integration-example.js --output-dir ./schemas
+
+# MySQL integration
+export MYSQL_HOST=localhost MYSQL_USER=user
+node automation/mysql-integration-example.js --output-dir ./schemas
+
+# MongoDB integration
+export MONGO_URI=mongodb://localhost:27017
+node automation/mongodb-integration-example.js --output-dir ./schemas
+```
+
+### 4. Test LLM Comprehension
 
 Test how LLMs understand your content:
 
 ```bash
-# Run comprehension test
-node testing/llm-comprehension-test.js https://yoursite.com/product
+# Entity extraction test
+node llm-testing/entity-extraction-test.js complete-examples/saas-product-page.html --provider both
 
-# Check results
-cat results/comprehension-report.json
+# Relationship understanding test
+node llm-testing/relationship-test.js complete-examples/saas-product-page.html --provider both
+
+# General comprehension test
+node llm-testing/comprehension-test.js complete-examples/saas-product-page.html --provider both
+```
+
+### 5. Technical Documentation
+
+Apply LLMO to your technical docs:
+
+```bash
+# See examples for databases, APIs, authentication, etc.
+cat technical-docs-examples/07-api-design.md
+cat technical-docs-examples/12-authentication.md
+cat technical-docs-examples/02-databases.md
+
+# Use as templates for your own technical documentation
 ```
 
 ## 📚 How to Use with the Book
@@ -112,10 +162,12 @@ Each code example is referenced in the corresponding book chapter:
 - **Chapter 10-12 (Machine Parsing)**: See `schema-templates/` and `html-examples/`
 - **Chapter 13-15 (Human Experience)**: See `complete-examples/` for full implementations
 - **Chapter 16 (Strategy)**: See `automation/` for workflow tools
-- **Chapter 17 (Technical)**: See `automation/` and `validation/`
+- **Chapter 17 (Technical)**: See `automation/`, `validation/`, and `llm-testing/`
 - **Chapter 18 (Cross-Reference)**: See `complete-examples/` for linking patterns
 
 **Industry Use Cases**: See `industry-examples/` for your specific industry
+
+**Technical Documentation**: See `technical-docs-examples/` for applying LLMO to system design, API docs, and architecture documentation
 
 ## 🛠️ Prerequisites
 

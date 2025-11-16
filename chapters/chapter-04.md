@@ -28,41 +28,8 @@ Your company, divisions, subsidiaries, and related corporate structures.
 
 **Schema.org type:** `Organization` (or subtypes: `Corporation`, `LocalBusiness`, etc.)
 
-**Example entity definition:**
-```json
-{
-  "@context": "https://schema.org",
-  "@type": "Corporation",
-  "@id": "https://acmecorp.com/#organization",
-  "name": "Acme Corp",
-  "alternateName": ["Acme Corporation", "Acme"],
-  "legalName": "Acme Corp, Inc.",
-  "foundingDate": "2020-03-15",
-  "founder": {
-    "@type": "Person",
-    "@id": "https://acmecorp.com/about/team/jane-smith#person"
-  },
-  "location": {
-    "@type": "Place",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "San Francisco",
-      "addressRegion": "CA",
-      "addressCountry": "US"
-    }
-  },
-  "industry": "Computer Software",
-  "numberOfEmployees": {
-    "@type": "QuantitativeValue",
-    "value": 45
-  },
-  "sameAs": [
-    "https://www.linkedin.com/company/acmecorp",
-    "https://www.crunchbase.com/organization/acme-corp",
-    "https://www.wikidata.org/wiki/Q123456"
-  ]
-}
-```
+**Implementation approach:**
+Create comprehensive schema markup declaring all core attributes (canonical name, alternate names, legal name, founding date, founder with reference to Person entity, location with full address structure, industry classification, employee count, and sameAs links to external authoritative sources like LinkedIn, Crunchbase, and Wikidata).
 
 **Product Entities**
 Software, services, physical goods—anything you sell or offer.
@@ -81,47 +48,8 @@ Software, services, physical goods—anything you sell or offer.
 
 **Schema.org types:** `Product`, `SoftwareApplication`, `Service`
 
-**Example entity definition:**
-```json
-{
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "@id": "https://acmecorp.com/products/crm-pro#product",
-  "name": "Acme CRM Pro",
-  "alternateName": ["CRM Pro", "Acme CRM"],
-  "applicationCategory": "BusinessApplication",
-  "applicationSubCategory": "CRM Software",
-  "operatingSystem": "Cloud-based",
-  "description": "Cloud-based sales management platform designed for startups and SMBs",
-  "releaseDate": "2021-06-01",
-  "manufacturer": {
-    "@type": "Organization",
-    "@id": "https://acmecorp.com/#organization"
-  },
-  "audience": {
-    "@type": "Audience",
-    "audienceType": "startups and small-to-medium businesses"
-  },
-  "featureList": [
-    "Contact management",
-    "Deal pipeline tracking",
-    "Email integration",
-    "Reporting and analytics",
-    "Mobile apps (iOS, Android)"
-  ],
-  "offers": {
-    "@type": "Offer",
-    "price": "49",
-    "priceCurrency": "USD",
-    "priceSpecification": {
-      "@type": "UnitPriceSpecification",
-      "price": "49",
-      "priceCurrency": "USD",
-      "unitText": "per user per month"
-    }
-  }
-}
-```
+**Implementation approach:**
+Create detailed schema markup with product name, alternate names, application category and subcategory, operating system/deployment model, comprehensive description, release date, manufacturer relationship (linking to Organization entity), target audience specification, complete feature list, and structured offer with pricing details including currency and unit specification.
 
 **Person Entities**
 Founders, executives, team members, experts, authors.
@@ -138,29 +66,8 @@ Founders, executives, team members, experts, authors.
 
 **Schema.org type:** `Person`
 
-**Example entity definition:**
-```json
-{
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "@id": "https://acmecorp.com/about/team/jane-smith#person",
-  "name": "Jane Smith",
-  "givenName": "Jane",
-  "familyName": "Smith",
-  "jobTitle": "CEO and Co-founder",
-  "worksFor": {
-    "@type": "Organization",
-    "@id": "https://acmecorp.com/#organization"
-  },
-  "description": "Jane Smith is CEO and co-founder of Acme Corp. She has 15 years of experience in enterprise software and previously led product at TechCorp.",
-  "expertise": ["SaaS", "CRM", "Sales enablement"],
-  "sameAs": [
-    "https://www.linkedin.com/in/janesmith",
-    "https://twitter.com/janesmith"
-  ],
-  "image": "https://acmecorp.com/images/team/jane-smith.jpg"
-}
-```
+**Implementation approach:**
+Create Person schema markup with full name (given name and family name structured separately), job title, worksFor relationship (linking to Organization entity), comprehensive biography, expertise areas, sameAs links to social profiles (LinkedIn, Twitter, etc.), and professional photo URL.
 
 **Concept Entities**
 Proprietary methodologies, frameworks, terminology you've coined.
@@ -175,26 +82,8 @@ Proprietary methodologies, frameworks, terminology you've coined.
 
 **Schema.org type:** `DefinedTerm` or custom type
 
-**Example entity definition:**
-```json
-{
-  "@context": "https://schema.org",
-  "@type": "DefinedTerm",
-  "@id": "https://acmecorp.com/methodology/rapid-deployment#concept",
-  "name": "Rapid Deployment Framework",
-  "alternateName": ["RDF", "Acme Rapid Deployment"],
-  "description": "A proprietary methodology for deploying CRM systems in under 5 minutes, developed by Acme Corp in 2021",
-  "termCode": "RDF",
-  "inDefinedTermSet": {
-    "@type": "DefinedTermSet",
-    "name": "Acme Corp Methodologies"
-  },
-  "creator": {
-    "@type": "Organization",
-    "@id": "https://acmecorp.com/#organization"
-  }
-}
-```
+**Implementation approach:**
+Create DefinedTerm schema markup with concept name, alternate names/abbreviations, comprehensive definition, term code, placement within a DefinedTermSet (grouping related concepts), and creator relationship (linking to Organization or Person entity who developed it).
 
 **Location Entities**
 Offices, stores, service areas, headquarters.
@@ -429,46 +318,19 @@ Common entity names create confusion. "Apple", "Amazon", "Delta"—all have mult
 **2. Implement explicit disambiguation:**
 
 **Method A: Contextual Clarification**
-```
-Always pair with disambiguating context:
+Always pair entity names with disambiguating context:
 - "Acme Corp, the San Francisco-based SaaS company"
 - "Acme CRM Pro, developed by Acme Corp"
 - "Jane Smith, CEO of Acme Corp"
-```
 
 **Method B: SameAs Links**
-```json
-{
-  "@type": "Organization",
-  "name": "Acme Corp",
-  "sameAs": [
-    "https://www.wikidata.org/wiki/Q123456",
-    "https://www.crunchbase.com/organization/acme-corp",
-    "https://www.linkedin.com/company/acmecorp"
-  ]
-}
-```
-
-These external identifiers are authoritative—they uniquely identify YOUR entity globally.
+Include sameAs properties in your schema markup linking to authoritative external sources (Wikidata, Crunchbase, LinkedIn). These external identifiers uniquely identify YOUR entity globally and provide the highest-confidence disambiguation signal to LLMs.
 
 **Method C: Unique Identifiers**
-```json
-{
-  "@type": "Organization",
-  "name": "Acme Corp",
-  "taxID": "12-3456789",
-  "duns": "123456789",
-  "leiCode": "1234567890ABCDEFGH12"
-}
-```
+Add official identifiers to your schema markup: tax ID, DUNS number, LEI code, or other government/industry-standard identifiers. These provide legal-grade entity disambiguation.
 
 **Method D: Explicit Differentiation**
-```html
-<p>
-  Acme Corp (not to be confused with Acme Corporation, the animation company)
-  is a B2B SaaS company founded in 2020.
-</p>
-```
+When name confusion exists, explicitly state the distinction in natural language: "Acme Corp (not to be confused with Acme Corporation, the animation company) is a B2B SaaS company founded in 2020."
 
 **Disambiguation priority:**
 1. SameAs links (highest authority)
@@ -501,49 +363,15 @@ These external identifiers are authoritative—they uniquely identify YOUR entit
 - Article → about → Product/Organization
 - Article → mentions → Person/Product/Organization
 
-**Explicit relationship declaration example:**
+**Explicit relationship declaration approach:**
 
-```json
-{
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": "Acme CRM Pro",
-  "manufacturer": {
-    "@type": "Organization",
-    "@id": "https://acmecorp.com/#organization",
-    "name": "Acme Corp"
-  },
-  "isVariantOf": {
-    "@type": "ProductGroup",
-    "@id": "https://acmecorp.com/products/crm#productgroup",
-    "name": "Acme CRM",
-    "hasVariant": [
-      {
-        "@type": "SoftwareApplication",
-        "@id": "https://acmecorp.com/products/crm-starter#product",
-        "name": "Acme CRM Starter"
-      },
-      {
-        "@type": "SoftwareApplication",
-        "@id": "https://acmecorp.com/products/crm-pro#product",
-        "name": "Acme CRM Pro"
-      },
-      {
-        "@type": "SoftwareApplication",
-        "@id": "https://acmecorp.com/products/crm-enterprise#product",
-        "name": "Acme CRM Enterprise"
-      }
-    ]
-  },
-  "isRelatedTo": [
-    {
-      "@type": "SoftwareApplication",
-      "name": "Acme Analytics",
-      "@id": "https://acmecorp.com/products/analytics#product"
-    }
-  ]
-}
-```
+Declare all critical relationships in schema markup:
+- Product → manufacturer (link to Organization entity with @id reference)
+- Product → isVariantOf (link to ProductGroup for product tiers)
+- ProductGroup → hasVariant (list all product variants with @id references)
+- Product → isRelatedTo (link to complementary products)
+
+Each relationship uses @id references to maintain entity consistency across all pages.
 
 **Relationship mapping exercise:**
 
@@ -646,56 +474,16 @@ All pages referencing same entity use same @id:
 ```
 
 **Automated consistency checking:**
-```python
-# Entity consistency validator
 
-import re
+Create automated validation scripts that:
+- Define canonical entity names (organization, products, people)
+- List forbidden variants (incorrect names that shouldn't appear)
+- Scan all content files for forbidden variants
+- Report inconsistencies with file location and suggested corrections
+- Track issues by type (naming_inconsistency, attribute_mismatch, etc.)
+- Generate reports showing total issues found and specific locations
 
-class EntityConsistencyChecker:
-    def __init__(self):
-        self.canonical_entities = {
-            "organization": "Acme Corp",
-            "product_pro": "Acme CRM Pro",
-            "product_starter": "Acme CRM Starter",
-            "ceo": "Jane Smith"
-        }
-
-        self.forbidden_variants = {
-            "organization": ["Acme Corporation", "Acme Inc.", "ACME"],
-            "product_pro": ["CRM Pro", "Pro plan", "Acme CRM Professional"],
-            "ceo": ["Jane", "J. Smith", "Ms. Smith"]
-        }
-
-    def check_file(self, filepath):
-        with open(filepath, 'r') as f:
-            content = f.read()
-
-        issues = []
-
-        for entity_type, forbidden in self.forbidden_variants.items():
-            for variant in forbidden:
-                if variant in content:
-                    canonical = self.canonical_entities[entity_type]
-                    issues.append({
-                        "file": filepath,
-                        "issue": f"Found '{variant}', should be '{canonical}'",
-                        "type": "naming_inconsistency"
-                    })
-
-        return issues
-
-# Run on all content
-checker = EntityConsistencyChecker()
-all_issues = []
-for file in content_files:
-    issues = checker.check_file(file)
-    all_issues.extend(issues)
-
-# Report
-print(f"Found {len(all_issues)} consistency issues")
-for issue in all_issues:
-    print(f"  {issue['file']}: {issue['issue']}")
-```
+Run these checks regularly (weekly or before major content updates) to catch entity naming drift before it reaches production.
 
 ## Implementation: From Definition to Deployment
 
@@ -740,55 +528,13 @@ for issue in all_issues:
 
 **Create reusable schema components:**
 
-```javascript
-// schema-library.js
-// Reusable schema markup for all entities
+Build a centralized schema library containing complete JSON-LD definitions for all your entities:
+- Organization schema (with all attributes, founder relationships, sameAs links)
+- Product schemas for each product/tier (with manufacturer links, features, pricing)
+- Person schemas for key team members (with worksFor relationships, expertise)
+- Concept schemas for proprietary methodologies
 
-const SchemaLibrary = {
-  organization: {
-    "@context": "https://schema.org",
-    "@type": "Corporation",
-    "@id": "https://acmecorp.com/#organization",
-    "name": "Acme Corp",
-    "alternateName": ["Acme Corporation", "Acme"],
-    "legalName": "Acme Corp, Inc.",
-    "url": "https://acmecorp.com",
-    "logo": "https://acmecorp.com/logo.png",
-    "foundingDate": "2020-03-15",
-    // ... complete organization schema
-  },
-
-  products: {
-    crm_pro: {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "@id": "https://acmecorp.com/products/crm-pro#product",
-      "name": "Acme CRM Pro",
-      // ... complete product schema
-    },
-    crm_starter: {
-      // ... starter schema
-    }
-  },
-
-  people: {
-    jane_smith: {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "@id": "https://acmecorp.com/about/team/jane-smith#person",
-      // ... complete person schema
-    }
-  }
-};
-
-// Usage in pages
-function insertOrganizationSchema() {
-  const script = document.createElement('script');
-  script.type = 'application/ld+json';
-  script.text = JSON.stringify(SchemaLibrary.organization);
-  document.head.appendChild(script);
-}
-```
+Create functions or templates that inject the appropriate schema markup into each page's head section as JSON-LD script tags. This ensures consistency—every page referencing the same entity uses identical @id values and attributes.
 
 ### Step 3: Consistency Maintenance Protocol
 

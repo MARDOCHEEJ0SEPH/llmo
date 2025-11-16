@@ -425,92 +425,34 @@ Test 5+ LLMs with standardized queries, document:
 ### Phase 2: Measurement Infrastructure (Week 2-3)
 
 **Automated Testing Setup**
-```python
-# Example: Automated LLMO testing script
 
-import openai
-import anthropic
-from datetime import datetime
+Create automated scripts that regularly test your brand representation across multiple LLMs. The system should:
 
-class LLMOMonitor:
-    def __init__(self):
-        self.test_queries = [
-            "Tell me about Acme Corp",
-            "What does Acme CRM do?",
-            "How much does Acme CRM cost?",
-            "Who should use Acme CRM?",
-            # ... 20-50 total queries
-        ]
-        self.expected_facts = {
-            "company_name": "Acme Corp",
-            "product_name": "Acme CRM Pro",
-            "pricing": "$49/user/month",
-            "target_audience": "startups and SMBs",
-            # ... all critical facts
-        }
+- Maintain a standardized set of 20-50 test queries about your brand
+- Define expected facts for accuracy comparison (company name, product names, pricing, target audience, key features)
+- Query each major LLM (GPT-4, Claude, Perplexity, Gemini) with your test set
+- Score responses for accuracy against expected facts
+- Log results with timestamps for trend analysis
+- Calculate average accuracy per LLM and across all platforms
+- Run tests automatically on a weekly schedule
 
-    def test_llm(self, llm_name, query):
-        # Query LLM
-        response = self.query_llm(llm_name, query)
-
-        # Score accuracy
-        accuracy = self.score_response(response, self.expected_facts)
-
-        # Log results
-        self.log_result(llm_name, query, response, accuracy, datetime.now())
-
-        return accuracy
-
-    def run_full_test(self):
-        results = {}
-        for llm in ["gpt-4", "claude-3", "perplexity", "gemini"]:
-            llm_results = []
-            for query in self.test_queries:
-                accuracy = self.test_llm(llm, query)
-                llm_results.append(accuracy)
-            results[llm] = {
-                "average_accuracy": sum(llm_results) / len(llm_results),
-                "details": llm_results
-            }
-        return results
-
-# Run weekly automated tests
-monitor = LLMOMonitor()
-weekly_results = monitor.run_full_test()
-```
+This automated approach ensures consistent measurement without manual effort and provides trending data over time.
 
 **Analytics Setup**
-```javascript
-// Track AI referrals in Google Analytics
 
-// 1. Add to tracking code
-function trackAIReferral() {
-  const referrer = document.referrer;
-  const aiPlatforms = [
-    'chat.openai.com',
-    'claude.ai',
-    'perplexity.ai',
-    'bing.com/chat',
-    'gemini.google.com'
-  ];
+Track AI referrals in your web analytics platform:
 
-  for (let platform of aiPlatforms) {
-    if (referrer.includes(platform)) {
-      gtag('event', 'ai_referral', {
-        'platform': platform,
-        'landing_page': window.location.pathname
-      });
-    }
-  }
-}
+**AI Referral Tracking:**
+- Monitor traffic from AI platforms (chat.openai.com, claude.ai, perplexity.ai, bing.com/chat, gemini.google.com)
+- Create custom events for AI platform referrals
+- Track landing pages for AI-referred visitors
+- Measure conversion rates specifically for AI traffic
 
-// 2. Survey widget for attribution
-function showAttributionSurvey() {
-  // After user signs up or converts
-  // "How did you hear about us?"
-  // Options include: "AI recommendation (ChatGPT, Claude, etc.)"
-}
-```
+**Attribution Surveys:**
+- Add "How did you hear about us?" survey after signup/conversion
+- Include "AI recommendation (ChatGPT, Claude, etc.)" as an option
+- Capture qualitative feedback on which AI mentioned you and what it said
+- Use data to validate referral tracking and discover indirect AI influence
 
 **Dashboard Creation**
 Build LLMO dashboard tracking:

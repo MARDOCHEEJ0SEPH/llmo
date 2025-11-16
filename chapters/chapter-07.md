@@ -15,48 +15,17 @@ This chapter provides the complete framework for hierarchical information archit
 **Hierarchy depth rules:**
 
 **Too Shallow (2 levels):**
-```
-Products
-  ├─ Acme CRM Starter
-  ├─ Acme CRM Pro
-  └─ Acme CRM Enterprise
-```
+Products contain three product tiers with no further structure.
 
 Problem: No feature organization, no category context, limited LLM understanding
 
 **Too Deep (6+ levels):**
-```
-Software
-  └─ Business Software
-      └─ Sales Software
-          └─ CRM Software
-              └─ Cloud CRM
-                  └─ SMB CRM
-                      └─ Acme CRM Pro
-```
+Software > Business Software > Sales Software > CRM Software > Cloud CRM > SMB CRM > Acme CRM Pro (6 levels of nesting)
 
 Problem: Over-nesting, LLMs lose context deep in hierarchy, poor usability
 
 **Optimal (3-4 levels):**
-```
-Products
-  └─ Acme CRM (Product Family)
-      ├─ Acme CRM Starter (Tier)
-      │   ├─ Core Features
-      │   ├─ Integrations
-      │   └─ Pricing
-      ├─ Acme CRM Pro (Tier)
-      │   ├─ Core Features
-      │   ├─ Advanced Features
-      │   ├─ Integrations
-      │   └─ Pricing
-      └─ Acme CRM Enterprise (Tier)
-          ├─ Core Features
-          ├─ Advanced Features
-          ├─ Enterprise Features
-          ├─ Integrations
-          └─ Pricing
-```
+Products > Acme CRM (Product Family) > Individual Tiers (Starter/Pro/Enterprise) > Feature Categories (Core Features, Advanced Features, Integrations, Pricing)
 
 Benefits: Clear relationships, manageable depth, LLM-friendly structure
 
@@ -77,30 +46,10 @@ Benefits: Clear relationships, manageable depth, LLM-friendly structure
 **Every hierarchy level should represent consistent abstraction:**
 
 **❌ Inconsistent (Don't):**
-```
-Features
-  ├─ Contact Management (Feature Category)
-  ├─ Custom Fields (Specific Feature - wrong level!)
-  ├─ Reporting (Feature Category)
-  └─ Mobile App (Platform - wrong dimension!)
-```
+Mixing different abstraction levels: Feature Categories (Contact Management, Reporting) alongside Specific Features (Custom Fields) and Platform dimensions (Mobile App) at the same hierarchy level.
 
 **✓ Consistent (Do):**
-```
-Features
-  ├─ Contact Management (Category)
-  │   ├─ Custom Fields (Specific)
-  │   ├─ Contact Import (Specific)
-  │   └─ Contact Segmentation (Specific)
-  ├─ Deal Pipeline (Category)
-  │   ├─ Drag-and-Drop (Specific)
-  │   ├─ Stage Automation (Specific)
-  │   └─ Win/Loss Tracking (Specific)
-  └─ Reporting (Category)
-      ├─ Standard Reports (Specific)
-      ├─ Custom Dashboards (Specific)
-      └─ Export Options (Specific)
-```
+Features level contains only Categories (Contact Management, Deal Pipeline, Reporting), each containing Specific features at the next level (Custom Fields under Contact Management, Drag-and-Drop under Deal Pipeline, Standard Reports/Custom Dashboards/Export Options under Reporting).
 
 **Leveling principle:** Each level represents one consistent dimension of organization.
 

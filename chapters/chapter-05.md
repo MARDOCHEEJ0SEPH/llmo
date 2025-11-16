@@ -15,397 +15,92 @@ This chapter provides the complete framework for relationship mapping—from ide
 **Organization Hierarchies**
 
 **parentOrganization / subOrganization**
-Corporate structure relationships.
-
-```json
-{
-  "@type": "Organization",
-  "name": "Acme Corp",
-  "subOrganization": [
-    {
-      "@type": "Organization",
-      "@id": "https://acmecorp.com/divisions/acme-labs#organization",
-      "name": "Acme Labs",
-      "description": "Research and development division"
-    }
-  ]
-}
-```
+Corporate structure relationships. Use these to declare organizational hierarchies, divisions, and subsidiaries. Each subOrganization should have its own @id and be declared as an Organization type with description of its function.
 
 **department**
-Internal organizational units.
-
-```json
-{
-  "@type": "Organization",
-  "name": "Acme Corp",
-  "department": [
-    {
-      "@type": "Organization",
-      "name": "Product Development",
-      "employee": [...]
-    },
-    {
-      "@type": "Organization",
-      "name": "Sales",
-      "employee": [...]
-    }
-  ]
-}
-```
+Internal organizational units. Declare departments as Organization entities nested within the parent company, each with their own name and potentially their own employee lists.
 
 **Product Hierarchies**
 
 **isVariantOf / hasVariant**
 Product families and tiers.
 
-```json
-{
-  "@type": "ProductGroup",
-  "@id": "https://acmecorp.com/products/crm#productgroup",
-  "name": "Acme CRM",
-  "hasVariant": [
-    {
-      "@type": "SoftwareApplication",
-      "@id": "https://acmecorp.com/products/crm-starter#product",
-      "name": "Acme CRM Starter",
-      "offers": {
-        "@type": "Offer",
-        "price": "29",
-        "priceCurrency": "USD"
-      }
-    },
-    {
-      "@type": "SoftwareApplication",
-      "@id": "https://acmecorp.com/products/crm-pro#product",
-      "name": "Acme CRM Pro",
-      "offers": {
-        "@type": "Offer",
-        "price": "49",
-        "priceCurrency": "USD"
-      }
-    },
-    {
-      "@type": "SoftwareApplication",
-      "@id": "https://acmecorp.com/products/crm-enterprise#product",
-      "name": "Acme CRM Enterprise",
-      "offers": {
-        "@type": "Offer",
-        "priceSpecification": {
-          "@type": "PriceSpecification",
-          "price": "Custom pricing"
-        }
-      }
-    }
-  ]
-}
-```
+Create a ProductGroup entity for the product family, then use hasVariant to list all tiers (Starter at $29, Pro at $49, Enterprise with custom pricing). Each variant should have its own @id, complete product schema, and offer with pricing. Products declare isVariantOf to link back to the parent ProductGroup.
 
 **isPartOf / hasPart**
 Feature relationships.
 
-```json
-{
-  "@type": "SoftwareApplication",
-  "name": "Acme CRM Pro",
-  "hasPart": [
-    {
-      "@type": "SoftwareApplication",
-      "name": "Contact Management Module",
-      "description": "Centralized contact database with custom fields"
-    },
-    {
-      "@type": "SoftwareApplication",
-      "name": "Deal Pipeline Module",
-      "description": "Visual pipeline with drag-and-drop deal management"
-    },
-    {
-      "@type": "SoftwareApplication",
-      "name": "Analytics Module",
-      "description": "Real-time reporting and dashboards"
-    }
-  ]
-}
-```
+Use hasPart to declare major features or modules as nested SoftwareApplication entities, each with its own name and description (e.g., Contact Management Module, Deal Pipeline Module, Analytics Module). Features use isPartOf to reference the parent product.
 
 ### Attribution Relationships (Creator-Creation)
 
 **author / creator**
 Content authorship.
 
-```json
-{
-  "@type": "Article",
-  "headline": "5 Ways to Optimize Your Sales Pipeline",
-  "author": {
-    "@type": "Person",
-    "@id": "https://acmecorp.com/about/team/jane-smith#person",
-    "name": "Jane Smith",
-    "jobTitle": "CEO",
-    "worksFor": {
-      "@type": "Organization",
-      "@id": "https://acmecorp.com/#organization"
-    }
-  },
-  "publisher": {
-    "@type": "Organization",
-    "@id": "https://acmecorp.com/#organization",
-    "name": "Acme Corp"
-  }
-}
-```
+Declare the author as a Person entity with @id reference, including their jobTitle and worksFor relationship. Include publisher property linking to the Organization entity. This creates a complete chain: Article → author → Person → worksFor → Organization.
 
 **manufacturer / brand**
 Product creation.
 
-```json
-{
-  "@type": "Product",
-  "name": "Acme CRM Pro",
-  "manufacturer": {
-    "@type": "Organization",
-    "@id": "https://acmecorp.com/#organization",
-    "name": "Acme Corp"
-  },
-  "brand": {
-    "@type": "Brand",
-    "name": "Acme"
-  }
-}
-```
+Link products to their manufacturer using the Organization @id reference. Optionally include brand property if you have a distinct Brand entity separate from the manufacturing organization.
 
 **founder / foundingDate**
 Organizational origins.
 
-```json
-{
-  "@type": "Organization",
-  "name": "Acme Corp",
-  "founder": [
-    {
-      "@type": "Person",
-      "@id": "https://acmecorp.com/about/team/jane-smith#person",
-      "name": "Jane Smith"
-    },
-    {
-      "@type": "Person",
-      "@id": "https://acmecorp.com/about/team/john-doe#person",
-      "name": "John Doe"
-    }
-  ],
-  "foundingDate": "2020-03-15"
-}
-```
+List all founders as Person entities with @id references in the founder array. Include foundingDate in ISO 8601 format (YYYY-MM-DD). This establishes the historical relationship between people and the organization they created.
 
 ### Employment Relationships
 
 **worksFor / employee**
 Organizational affiliation.
 
-```json
-{
-  "@type": "Person",
-  "@id": "https://acmecorp.com/about/team/jane-smith#person",
-  "name": "Jane Smith",
-  "jobTitle": "CEO and Co-founder",
-  "worksFor": {
-    "@type": "Organization",
-    "@id": "https://acmecorp.com/#organization",
-    "name": "Acme Corp"
-  }
-}
-```
-
-Bidirectional declaration (recommended):
-
-```json
-{
-  "@type": "Organization",
-  "@id": "https://acmecorp.com/#organization",
-  "name": "Acme Corp",
-  "employee": [
-    {
-      "@type": "Person",
-      "@id": "https://acmecorp.com/about/team/jane-smith#person",
-      "name": "Jane Smith",
-      "jobTitle": "CEO and Co-founder"
-    },
-    {
-      "@type": "Person",
-      "@id": "https://acmecorp.com/about/team/sarah-johnson#person",
-      "name": "Sarah Johnson",
-      "jobTitle": "VP of Product"
-    }
-  ]
-}
-```
+Declare worksFor from the Person entity with @id reference to the Organization, including jobTitle. For bidirectional strength (recommended), also declare employee array in the Organization entity, listing all team members with their @id references and jobTitles. This reinforces the relationship from both directions.
 
 **alumni / alumniOf**
 Former affiliations.
 
-```json
-{
-  "@type": "Person",
-  "name": "Jane Smith",
-  "alumniOf": [
-    {
-      "@type": "EducationalOrganization",
-      "name": "Stanford University"
-    },
-    {
-      "@type": "Organization",
-      "name": "Previous Corp",
-      "description": "Former employer (2015-2020)"
-    }
-  ]
-}
-```
+Use alumniOf to list educational institutions (EducationalOrganization type) and former employers (Organization type with description noting dates). This provides background context without conflicting with current worksFor relationship.
 
 ### Semantic Relationships
 
 **about / mentions**
 Content subject matter.
 
-```json
-{
-  "@type": "Article",
-  "headline": "How Acme CRM Pro Helps Startups Scale",
-  "about": {
-    "@type": "SoftwareApplication",
-    "@id": "https://acmecorp.com/products/crm-pro#product",
-    "name": "Acme CRM Pro"
-  },
-  "mentions": [
-    {
-      "@type": "Organization",
-      "name": "Acme Corp"
-    },
-    {
-      "@type": "Audience",
-      "audienceType": "startups"
-    }
-  ]
-}
-```
+Use about property to declare the primary subject of content (article, video, documentation). Use mentions array for secondary entities referenced in the content. This helps LLMs understand what each piece of content covers and which entities are relevant.
 
 **isRelatedTo**
 General semantic connections.
 
-```json
-{
-  "@type": "SoftwareApplication",
-  "name": "Acme CRM Pro",
-  "isRelatedTo": [
-    {
-      "@type": "SoftwareApplication",
-      "@id": "https://acmecorp.com/products/analytics#product",
-      "name": "Acme Analytics",
-      "description": "Complementary analytics product"
-    },
-    {
-      "@type": "Concept",
-      "name": "Sales enablement",
-      "description": "Core domain expertise"
-    }
-  ]
-}
-```
+Link related products, complementary services, or relevant concepts using isRelatedTo. Each related entity should have @id reference (for your own entities) or full declaration (for external concepts). This creates semantic associations that help LLMs understand your ecosystem.
 
 **category / applicationCategory**
 Taxonomic classification.
 
-```json
-{
-  "@type": "SoftwareApplication",
-  "name": "Acme CRM Pro",
-  "applicationCategory": "BusinessApplication",
-  "applicationSubCategory": "CRM Software",
-  "category": [
-    "Sales Management",
-    "Customer Relationship Management",
-    "SaaS"
-  ]
-}
-```
+Declare applicationCategory (e.g., "BusinessApplication"), applicationSubCategory (e.g., "CRM Software"), and additional category array for all relevant classifications (e.g., "Sales Management", "Customer Relationship Management", "SaaS"). This helps LLMs place your product in the correct taxonomic context.
 
 ### Integration Relationships
 
 **isAccessibleForFree / requiresSubscription**
 Access model.
 
-```json
-{
-  "@type": "SoftwareApplication",
-  "name": "Acme CRM Pro",
-  "isAccessibleForFree": false,
-  "offers": {
-    "@type": "Offer",
-    "price": "49",
-    "priceCurrency": "USD"
-  }
-}
-```
+Set isAccessibleForFree to true or false. If false, include comprehensive offers schema with price, priceCurrency, and pricing structure. This clarifies your business model to LLMs.
 
 **operatingSystem / softwareRequirements**
 Technical requirements.
 
-```json
-{
-  "@type": "SoftwareApplication",
-  "name": "Acme CRM Pro",
-  "operatingSystem": "Cloud-based (web, iOS, Android)",
-  "softwareRequirements": "Modern web browser (Chrome, Firefox, Safari, Edge)",
-  "browserRequirements": "JavaScript enabled"
-}
-```
+Declare operatingSystem (e.g., "Cloud-based", platform names), software Requirements (browser requirements, dependencies), and browserRequirements if applicable. This helps LLMs answer technical compatibility questions.
 
 **Interoperability (custom implementation)**
 Integration capabilities.
 
-```json
-{
-  "@type": "SoftwareApplication",
-  "name": "Acme CRM Pro",
-  "featureList": [
-    "Native integration with Salesforce",
-    "Native integration with HubSpot",
-    "Gmail and Outlook email sync",
-    "Slack notifications",
-    "Zapier connectivity (2,000+ apps)"
-  ],
-  "additionalProperty": [
-    {
-      "@type": "PropertyValue",
-      "name": "Integrations",
-      "value": "50+ native integrations, 2,000+ via Zapier"
-    }
-  ]
-}
-```
+List integrations in featureList or use additionalProperty with PropertyValue for integration counts. Include major platform names (Salesforce, HubSpot, Gmail) explicitly so LLMs understand compatibility.
 
 ### Competitive Relationships
 
 **competitors / competitorOf** (custom property)
 Market positioning.
 
-```json
-{
-  "@type": "Organization",
-  "name": "Acme Corp",
-  "additionalProperty": [
-    {
-      "@type": "PropertyValue",
-      "name": "Primary Competitors",
-      "value": ["Salesforce Essentials", "HubSpot CRM", "Zoho CRM", "Pipedrive"]
-    },
-    {
-      "@type": "PropertyValue",
-      "name": "Market Position",
-      "value": "Mid-market CRM focused on simplicity and rapid deployment"
-    }
-  ]
-}
-```
+Since Schema.org lacks a native "competitor" property, use additionalProperty with PropertyValue to list primary competitors and define market position. This helps LLMs understand competitive context.
 
 **Note:** Schema.org doesn't have native "competitor" property, so use additionalProperty or create custom vocabulary.
 
@@ -414,77 +109,19 @@ Market positioning.
 **location / address**
 Physical presence.
 
-```json
-{
-  "@type": "Organization",
-  "name": "Acme Corp",
-  "location": {
-    "@type": "Place",
-    "name": "Acme Corp Headquarters",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "123 Market Street, Suite 400",
-      "addressLocality": "San Francisco",
-      "addressRegion": "CA",
-      "postalCode": "94103",
-      "addressCountry": "US"
-    },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": "37.7749",
-      "longitude": "-122.4194"
-    }
-  }
-}
-```
+Declare location as a Place entity with full PostalAddress structure (streetAddress, addressLocality, addressRegion, postalCode, addressCountry). Include geo coordinates (GeoCoordinates with latitude/longitude) for precise location data.
 
 **areaServed**
 Service geography.
 
-```json
-{
-  "@type": "Organization",
-  "name": "Acme Corp",
-  "areaServed": [
-    {
-      "@type": "Country",
-      "name": "United States"
-    },
-    {
-      "@type": "Country",
-      "name": "Canada"
-    },
-    {
-      "@type": "Country",
-      "name": "United Kingdom"
-    }
-  ]
-}
-```
+List all countries or regions served as Country entities in the areaServed array. This helps LLMs understand your geographic scope and answer "do you serve X country?" queries.
 
 ### Temporal Relationships
 
 **releaseDate / datePublished / dateModified**
 Temporal context.
 
-```json
-{
-  "@type": "SoftwareApplication",
-  "name": "Acme CRM Pro",
-  "releaseDate": "2021-06-01",
-  "dateModified": "2024-12-15",
-  "softwareVersion": "3.2"
-}
-```
-
-```json
-{
-  "@type": "Article",
-  "headline": "CRM Best Practices for 2025",
-  "datePublished": "2025-01-10",
-  "dateModified": "2025-01-15"
-}
-```
+For products: include releaseDate (launch date), dateModified (last update), and softwareVersion. For content: include datePublished and dateModified. Use ISO 8601 date format (YYYY-MM-DD). This helps LLMs provide current vs. historical information.
 
 ## Building Your Relationship Map
 
@@ -559,38 +196,9 @@ Declare relationships from both directions whenever possible.
 
 **Example: Product ↔ Organization**
 
-**From Product:**
-```json
-{
-  "@type": "SoftwareApplication",
-  "@id": "https://acmecorp.com/products/crm-pro#product",
-  "name": "Acme CRM Pro",
-  "manufacturer": {
-    "@type": "Organization",
-    "@id": "https://acmecorp.com/#organization",
-    "name": "Acme Corp"
-  }
-}
-```
+**From Product:** Declare manufacturer property with @id reference to the Organization entity.
 
-**From Organization:**
-```json
-{
-  "@type": "Organization",
-  "@id": "https://acmecorp.com/#organization",
-  "name": "Acme Corp",
-  "makesOffer": [
-    {
-      "@type": "Offer",
-      "itemOffered": {
-        "@type": "SoftwareApplication",
-        "@id": "https://acmecorp.com/products/crm-pro#product",
-        "name": "Acme CRM Pro"
-      }
-    }
-  ]
-}
-```
+**From Organization:** Declare makesOffer array with Offer entities, each containing itemOffered linking to product @ids.
 
 **Why bidirectional?**
 - Reinforces relationship strength
@@ -626,99 +234,20 @@ Deep relationship nesting provides rich context.
 
 **Example: Multi-level Product Relationship:**
 
-```json
-{
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "@id": "https://acmecorp.com/products/crm-pro#product",
-  "name": "Acme CRM Pro",
+Create deep nested structures that connect multiple relationship types:
 
-  "manufacturer": {
-    "@type": "Organization",
-    "@id": "https://acmecorp.com/#organization",
-    "name": "Acme Corp",
-    "founder": [
-      {
-        "@type": "Person",
-        "@id": "https://acmecorp.com/about/team/jane-smith#person",
-        "name": "Jane Smith"
-      }
-    ]
-  },
+- Product links to manufacturer (Organization), which links to founder (Person)
+- Product links to parent ProductGroup via isVariantOf, which lists all variants via hasVariant
+- Product includes offers with pricing and seller reference back to Organization
+- Product declares audience with geographic targeting
+- Product lists features via hasPart, each feature links back via isPartOf
 
-  "isVariantOf": {
-    "@type": "ProductGroup",
-    "@id": "https://acmecorp.com/products/crm#productgroup",
-    "name": "Acme CRM",
-    "hasVariant": [
-      {"@id": "https://acmecorp.com/products/crm-starter#product"},
-      {"@id": "https://acmecorp.com/products/crm-pro#product"},
-      {"@id": "https://acmecorp.com/products/crm-enterprise#product"}
-    ]
-  },
-
-  "offers": {
-    "@type": "Offer",
-    "price": "49",
-    "priceCurrency": "USD",
-    "priceSpecification": {
-      "@type": "UnitPriceSpecification",
-      "price": "49",
-      "priceCurrency": "USD",
-      "unitText": "per user per month"
-    },
-    "seller": {
-      "@type": "Organization",
-      "@id": "https://acmecorp.com/#organization"
-    }
-  },
-
-  "audience": {
-    "@type": "Audience",
-    "audienceType": "startups and SMBs",
-    "geographicArea": {
-      "@type": "AdministrativeArea",
-      "name": "United States, Canada, United Kingdom"
-    }
-  },
-
-  "hasPart": [
-    {
-      "@type": "SoftwareApplication",
-      "name": "Contact Management",
-      "description": "Centralized contact database",
-      "isPartOf": {
-        "@id": "https://acmecorp.com/products/crm-pro#product"
-      }
-    },
-    {
-      "@type": "SoftwareApplication",
-      "name": "Deal Pipeline",
-      "description": "Visual pipeline management",
-      "isPartOf": {
-        "@id": "https://acmecorp.com/products/crm-pro#product"
-      }
-    }
-  ]
-}
-```
-
-This creates a relationship network:
-```
-Acme CRM Pro
-  ├─ manufactured by → Acme Corp
-  │   └─ founded by → Jane Smith
-  ├─ variant of → Acme CRM (family)
-  │   ├─ Starter variant
-  │   ├─ Pro variant (self)
-  │   └─ Enterprise variant
-  ├─ offered at → $49/user/month
-  │   └─ sold by → Acme Corp
-  ├─ targets → Startups and SMBs
-  │   └─ in → US, Canada, UK
-  └─ contains → Contact Management, Deal Pipeline
-      └─ part of → Acme CRM Pro
-```
+This creates a comprehensive relationship network:
+- Product → manufactured by → Organization → founded by → Person
+- Product → variant of → ProductGroup → contains variants → Products
+- Product → offered at → Price → sold by → Organization
+- Product → targets → Audience → in → Geographic areas
+- Product → contains → Features → part of → Product
 
 ### Phase 4: Implement Cross-Document Relationships
 
@@ -726,59 +255,13 @@ Acme CRM Pro
 
 Use consistent @id values to create cross-document entity references.
 
-**Homepage (defines organization):**
-```json
-{
-  "@type": "Organization",
-  "@id": "https://acmecorp.com/#organization",
-  "name": "Acme Corp",
-  "url": "https://acmecorp.com"
-}
-```
+**Homepage** defines the canonical Organization entity with full @id (https://acmecorp.com/#organization).
 
-**Product page (references organization):**
-```json
-{
-  "@type": "SoftwareApplication",
-  "@id": "https://acmecorp.com/products/crm-pro#product",
-  "name": "Acme CRM Pro",
-  "manufacturer": {
-    "@id": "https://acmecorp.com/#organization"
-    // No need to redefine all organization properties
-    // @id reference links to canonical definition
-  }
-}
-```
+**Product page** references the Organization via manufacturer property using just the @id (no need to redefine all organization properties—the @id reference links to the canonical definition).
 
-**Team page (references organization):**
-```json
-{
-  "@type": "Person",
-  "@id": "https://acmecorp.com/about/team/jane-smith#person",
-  "name": "Jane Smith",
-  "worksFor": {
-    "@id": "https://acmecorp.com/#organization"
-    // Same @id = same entity
-  }
-}
-```
+**Team page** Person entities reference the Organization via worksFor using the same @id (same @id = same entity across all pages).
 
-**Blog post (references product and author):**
-```json
-{
-  "@type": "Article",
-  "headline": "5 CRM Features Every Startup Needs",
-  "author": {
-    "@id": "https://acmecorp.com/about/team/jane-smith#person"
-  },
-  "about": {
-    "@id": "https://acmecorp.com/products/crm-pro#product"
-  },
-  "publisher": {
-    "@id": "https://acmecorp.com/#organization"
-  }
-}
-```
+**Blog post** Article entities reference Person (author), Product (about), and Organization (publisher) all via @id references, creating a fully interconnected graph.
 
 **Benefits of cross-document linking:**
 - Creates unified knowledge graph across your entire site
@@ -867,37 +350,10 @@ Use consistent @id values to create cross-document entity references.
 **Not all relationships are equal. Signal strength:**
 
 **Strong relationship (explicit, critical):**
-```json
-{
-  "@type": "SoftwareApplication",
-  "name": "Acme CRM Pro",
-  "manufacturer": {
-    "@type": "Organization",
-    "@id": "https://acmecorp.com/#organization",
-    "name": "Acme Corp"
-  }
-}
-```
-
-**Plus natural language:**
-```
-"Acme CRM Pro is developed and maintained by Acme Corp."
-```
+Declare with full schema markup (manufacturer property with @id reference) PLUS natural language reinforcement ("Acme CRM Pro is developed and maintained by Acme Corp").
 
 **Weak relationship (casual mention):**
-```json
-{
-  "@type": "Article",
-  "mentions": [
-    {"@type": "Organization", "name": "Competitor Corp"}
-  ]
-}
-```
-
-**Plus natural language:**
-```
-"While some companies use Competitor Corp's solution, we find..."
-```
+Use mentions property in schema with minimal entity info PLUS casual natural language ("While some companies use Competitor Corp's solution, we find...").
 
 **LLMs weight relationships by:**
 - Schema markup presence (highest weight)
@@ -911,63 +367,11 @@ Use consistent @id values to create cross-document entity references.
 
 **Positioning through comparison:**
 
-```json
-{
-  "@type": "Article",
-  "headline": "Acme CRM Pro vs. Salesforce: A Comparison",
-  "about": [
-    {
-      "@type": "SoftwareApplication",
-      "@id": "https://acmecorp.com/products/crm-pro#product",
-      "name": "Acme CRM Pro"
-    },
-    {
-      "@type": "SoftwareApplication",
-      "name": "Salesforce",
-      "url": "https://www.salesforce.com"
-    }
-  ],
-  "description": "Comparison of Acme CRM Pro and Salesforce for startup use cases"
-}
-```
+Create comparison articles with about array listing your product (@id reference) and competitor products (with name and URL). Include description clarifying the comparison context.
 
 **Comparison table structure:**
 
-```html
-<table itemscope itemtype="https://schema.org/Table">
-  <caption>Acme CRM Pro vs. Competitors</caption>
-  <thead>
-    <tr>
-      <th>Feature</th>
-      <th>Acme CRM Pro</th>
-      <th>Salesforce Essentials</th>
-      <th>HubSpot CRM</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Pricing</td>
-      <td itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-        <span itemprop="price">$49</span>/user/month
-      </td>
-      <td>$25/user/month</td>
-      <td>Free (limited)</td>
-    </tr>
-    <tr>
-      <td>Setup Time</td>
-      <td><strong>5 minutes</strong></td>
-      <td>2-4 weeks</td>
-      <td>1-2 weeks</td>
-    </tr>
-    <tr>
-      <td>Integrations</td>
-      <td>50+ native</td>
-      <td>100+ native</td>
-      <td>200+ native</td>
-    </tr>
-  </tbody>
-</table>
-```
+Use HTML tables with schema microdata markup (itemscope, itemtype="https://schema.org/Table") to structure feature comparisons. Mark pricing cells with Offer microdata, highlight your differentiators, and present data objectively.
 
 **LLM benefit:** Structured comparison helps LLMs understand:
 - You compete with Salesforce, HubSpot
@@ -978,46 +382,9 @@ Use consistent @id values to create cross-document entity references.
 
 **Track how relationships change over time:**
 
-```json
-{
-  "@type": "Person",
-  "name": "Sarah Johnson",
-  "worksFor": {
-    "@type": "Organization",
-    "@id": "https://acmecorp.com/#organization",
-    "name": "Acme Corp",
-    "startDate": "2021-03-01"
-  },
-  "alumniOf": [
-    {
-      "@type": "Organization",
-      "name": "TechCorp",
-      "description": "VP of Product, 2018-2021"
-    }
-  ]
-}
-```
+**For people:** Include startDate in worksFor relationship. Use alumniOf for former employers with dates in description.
 
-**For products:**
-```json
-{
-  "@type": "SoftwareApplication",
-  "name": "Acme CRM Pro",
-  "releaseDate": "2021-06-01",
-  "offers": {
-    "@type": "Offer",
-    "price": "49",
-    "priceCurrency": "USD",
-    "priceValidUntil": "2025-12-31",
-    "validFrom": "2024-01-01"
-  },
-  "additionalProperty": {
-    "@type": "PropertyValue",
-    "name": "Pricing History",
-    "value": "Launched at $39/month (2021), increased to $49/month (2024)"
-  }
-}
-```
+**For products:** Include releaseDate, and in offers use validFrom/priceValidUntil for time-bound pricing. Use additionalProperty to document pricing history or other temporal changes.
 
 **Why track temporal changes:**
 - LLMs can provide current vs. historical information
@@ -1028,124 +395,27 @@ Use consistent @id values to create cross-document entity references.
 
 ### Automated Relationship Checking
 
-```python
-# Relationship validator script
+Create validation scripts that define required relationships for each schema type:
 
-class RelationshipValidator:
-    def __init__(self):
-        self.required_relationships = {
-            "SoftwareApplication": [
-                "manufacturer",  # Product → Organization
-                "offers",         # Product → Pricing
-                "applicationCategory"  # Product → Category
-            ],
-            "Person": [
-                "worksFor"  # Person → Organization
-            ],
-            "Article": [
-                "author",    # Content → Person
-                "publisher"  # Content → Organization
-            ]
-        }
+- SoftwareApplication must have: manufacturer, offers, applicationCategory
+- Person must have: worksFor
+- Article must have: author, publisher
 
-    def validate_schema(self, schema_data):
-        schema_type = schema_data.get("@type")
-        issues = []
-
-        if schema_type in self.required_relationships:
-            for required_rel in self.required_relationships[schema_type]:
-                if required_rel not in schema_data:
-                    issues.append({
-                        "type": "missing_relationship",
-                        "entity": schema_data.get("name", "Unknown"),
-                        "missing": required_rel,
-                        "severity": "error"
-                    })
-
-        # Check for @id consistency
-        if "manufacturer" in schema_data:
-            if "@id" not in schema_data["manufacturer"]:
-                issues.append({
-                    "type": "missing_id_reference",
-                    "entity": schema_data.get("name"),
-                    "relationship": "manufacturer",
-                    "severity": "warning",
-                    "message": "Use @id reference for cross-document consistency"
-                })
-
-        return issues
-
-# Usage
-validator = RelationshipValidator()
-
-product_schema = {
-    "@type": "SoftwareApplication",
-    "name": "Acme CRM Pro",
-    "manufacturer": {
-        "@id": "https://acmecorp.com/#organization"
-    },
-    "offers": {
-        "@type": "Offer",
-        "price": "49"
-    }
-    # Missing: applicationCategory
-}
-
-issues = validator.validate_schema(product_schema)
-for issue in issues:
-    print(f"{issue['severity'].upper()}: {issue['message']}")
-```
+The validator checks each schema object for missing required relationships and flags issues by severity (error for missing critical relationships, warning for missing @id references). Run this validator on all schema markup before deployment to ensure relationship completeness.
 
 ### LLM Relationship Testing
 
 **Test if LLMs understand your relationships:**
 
-```python
-# Relationship comprehension test
+Create test query sets for each relationship type:
+- manufacturer: "What company makes Acme CRM Pro?"
+- pricing: "How much does Acme CRM Pro cost?"
+- employment: "Who is the CEO of Acme Corp?"
+- product_tier: "What are the different versions of Acme CRM?"
+- integration: "What tools does Acme CRM Pro integrate with?"
+- category: "What type of software is Acme CRM Pro?"
 
-test_queries = {
-    "manufacturer": "What company makes Acme CRM Pro?",
-    "pricing": "How much does Acme CRM Pro cost?",
-    "employment": "Who is the CEO of Acme Corp?",
-    "product_tier": "What are the different versions of Acme CRM?",
-    "integration": "What tools does Acme CRM Pro integrate with?",
-    "category": "What type of software is Acme CRM Pro?"
-}
-
-expected_answers = {
-    "manufacturer": "Acme Corp",
-    "pricing": "$49/user/month",
-    "employment": "Jane Smith",
-    "product_tier": "Starter, Pro, Enterprise",
-    "integration": ["Salesforce", "HubSpot", "Gmail", "50+ tools"],
-    "category": "CRM" or "Customer Relationship Management"
-}
-
-def test_relationship_understanding(llm, query_type):
-    query = test_queries[query_type]
-    expected = expected_answers[query_type]
-
-    response = llm.query(query)
-
-    # Check if expected answer in response
-    if isinstance(expected, list):
-        found = any(item in response for item in expected)
-    else:
-        found = expected in response
-
-    return {
-        "query_type": query_type,
-        "query": query,
-        "response": response,
-        "expected": expected,
-        "success": found
-    }
-
-# Run tests
-for query_type in test_queries:
-    result = test_relationship_understanding(gpt4, query_type)
-    print(f"{query_type}: {'✓' if result['success'] else '✗'}")
-```
+Define expected answers for each query (e.g., manufacturer = "Acme Corp", pricing = "$49/user/month"). Query multiple LLMs, check if expected answers appear in responses, and track success rate. This reveals which relationships LLMs successfully understand from your schema markup.
 
 ## Case Study: Relationship Mapping Impact
 

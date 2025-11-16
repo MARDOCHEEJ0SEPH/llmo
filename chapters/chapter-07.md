@@ -87,25 +87,12 @@ Each feature category is distinct, and together they cover all CRM functionality
 
 **Proper heading usage is critical for LLM parsing:**
 
-```html
-<h1>Acme CRM Pro</h1>  <!-- Page topic -->
-
-<h2>Core Features</h2>  <!-- Major section -->
-
-<h3>Contact Management</h3>  <!-- Subsection -->
-<p>Centralize all customer information...</p>
-
-<h4>Custom Fields</h4>  <!-- Detail -->
-<p>Create unlimited custom fields...</p>
-
-<h3>Deal Pipeline</h3>  <!-- Subsection (sibling of Contact Management) -->
-<p>Visual pipeline management...</p>
-
-<h4>Drag-and-Drop Interface</h4>  <!-- Detail -->
-<p>Move deals between stages...</p>
-
-<h2>Pricing</h2>  <!-- Major section (sibling of Core Features) -->
-```
+Use HTML heading tags (H1-H4) to create clear hierarchy:
+- H1: "Acme CRM Pro" (page topic)
+- H2: "Core Features" (major section)
+- H3: "Contact Management", "Deal Pipeline" (subsections under Core Features)
+- H4: "Custom Fields", "Drag-and-Drop Interface" (details under subsections)
+- H2: "Pricing" (major section, sibling of Core Features)
 
 **Hierarchy rules:**
 1. **One H1 per page** (page topic)
@@ -124,79 +111,14 @@ Each feature category is distinct, and together they cover all CRM functionality
 
 **Declare hierarchical relationships in schema:**
 
-**Product hierarchy:**
-```json
-{
-  "@context": "https://schema.org",
-  "@type": "ProductGroup",
-  "@id": "https://acmecorp.com/products/crm#productgroup",
-  "name": "Acme CRM",
-  "description": "Complete CRM solution for growing businesses",
+**Product hierarchy implementation:**
 
-  "hasVariant": [
-    {
-      "@type": "SoftwareApplication",
-      "@id": "https://acmecorp.com/products/crm-starter#product",
-      "name": "Acme CRM Starter",
-      "isVariantOf": {
-        "@id": "https://acmecorp.com/products/crm#productgroup"
-      },
+Create three-level hierarchy using Schema.org:
+- Level 1: ProductGroup (Acme CRM family) with description
+- Level 2: hasVariant array listing each product tier (Starter, Pro, Enterprise) with isVariantOf back-reference
+- Level 3: Each product's hasPart array listing features/modules with isPartOf back-reference
 
-      "hasPart": [
-        {
-          "@type": "SoftwareApplication",
-          "name": "Contact Management Module",
-          "description": "Core contact database",
-          "isPartOf": {
-            "@id": "https://acmecorp.com/products/crm-starter#product"
-          }
-        },
-        {
-          "@type": "SoftwareApplication",
-          "name": "Basic Pipeline Module",
-          "description": "Simple deal tracking",
-          "isPartOf": {
-            "@id": "https://acmecorp.com/products/crm-starter#product"
-          }
-        }
-      ]
-    },
-
-    {
-      "@type": "SoftwareApplication",
-      "@id": "https://acmecorp.com/products/crm-pro#product",
-      "name": "Acme CRM Pro",
-      "isVariantOf": {
-        "@id": "https://acmecorp.com/products/crm#productgroup"
-      },
-
-      "hasPart": [
-        {
-          "@type": "SoftwareApplication",
-          "name": "Advanced Contact Management",
-          "isPartOf": {
-            "@id": "https://acmecorp.com/products/crm-pro#product"
-          }
-        },
-        {
-          "@type": "SoftwareApplication",
-          "name": "Advanced Pipeline Module",
-          "isPartOf": {
-            "@id": "https://acmecorp.com/products/crm-pro#product"
-          }
-        },
-        {
-          "@type": "SoftwareApplication",
-          "name": "Analytics & Reporting",
-          "isPartOf": {
-            "@id": "https://acmecorp.com/products/crm-pro#product"
-          }
-        }
-      ]
-    }
-  ]
-}
-```
+This creates bidirectional parent-child relationships that LLMs can traverse in both directions.
 
 **Hierarchy levels:**
 1. **ProductGroup** (Acme CRM family)
@@ -306,49 +228,12 @@ Each feature category is distinct, and together they cover all CRM functionality
 
 **Pattern 2: Knowledge Base / Documentation**
 
-```html
-<nav aria-label="Documentation Navigation">
-  <h2>Documentation</h2>
-
-  <ul>
-    <li>
-      <a href="/docs/getting-started">Getting Started</a>
-      <ul>
-        <li><a href="/docs/getting-started/signup">Sign Up</a></li>
-        <li><a href="/docs/getting-started/setup">Initial Setup</a></li>
-        <li><a href="/docs/getting-started/first-contact">Add First Contact</a></li>
-      </ul>
-    </li>
-
-    <li>
-      <a href="/docs/features">Features</a>
-      <ul>
-        <li>
-          <a href="/docs/features/contacts">Contacts</a>
-          <ul>
-            <li><a href="/docs/features/contacts/import">Import Contacts</a></li>
-            <li><a href="/docs/features/contacts/custom-fields">Custom Fields</a></li>
-            <li><a href="/docs/features/contacts/segments">Segmentation</a></li>
-          </ul>
-        </li>
-
-        <li>
-          <a href="/docs/features/pipeline">Pipeline</a>
-          <ul>
-            <li><a href="/docs/features/pipeline/stages">Manage Stages</a></li>
-            <li><a href="/docs/features/pipeline/automation">Automation Rules</a></li>
-          </ul>
-        </li>
-      </ul>
-    </li>
-
-    <li>
-      <a href="/docs/integrations">Integrations</a>
-      <!-- Integration docs -->
-    </li>
-  </ul>
-</nav>
-```
+Create navigation with nested HTML lists showing hierarchy:
+- Level 1: Getting Started, Features, Integrations (main sections)
+- Level 2: Under Getting Started - Sign Up, Initial Setup, Add First Contact
+- Level 2: Under Features - Contacts, Pipeline (feature categories)
+- Level 3: Under Contacts - Import, Custom Fields, Segmentation (specific topics)
+- Level 3: Under Pipeline - Manage Stages, Automation Rules
 
 **Benefits for LLMs:**
 - Clear navigation hierarchy
@@ -358,62 +243,13 @@ Each feature category is distinct, and together they cover all CRM functionality
 
 **Pattern 3: Pricing Hierarchy**
 
-```html
-<div itemscope itemtype="https://schema.org/Product">
-  <h1 itemprop="name">Acme CRM Pricing</h1>
-
-  <section>
-    <h2>Choose Your Plan</h2>
-
-    <div itemscope itemtype="https://schema.org/Offer">
-      <h3 itemprop="name">Starter Plan</h3>
-      <meta itemprop="priceCurrency" content="USD">
-      <span itemprop="price">29</span>/user/month
-
-      <h4>Included Features</h4>
-      <ul itemprop="itemListElement" itemscope itemtype="https://schema.org/ItemList">
-        <li itemprop="itemListElement">Up to 1,000 contacts</li>
-        <li itemprop="itemListElement">Basic pipeline</li>
-        <li itemprop="itemListElement">Email integration</li>
-      </ul>
-    </div>
-
-    <div itemscope itemtype="https://schema.org/Offer">
-      <h3 itemprop="name">Pro Plan</h3>
-      <meta itemprop="priceCurrency" content="USD">
-      <span itemprop="price">49</span>/user/month
-
-      <h4>Everything in Starter, plus:</h4>
-      <ul>
-        <li>Unlimited contacts</li>
-        <li>Advanced pipeline</li>
-        <li>Custom reports</li>
-        <li>API access</li>
-      </ul>
-    </div>
-
-    <div itemscope itemtype="https://schema.org/Offer">
-      <h3 itemprop="name">Enterprise Plan</h3>
-      <span itemprop="price">Custom pricing</span>
-
-      <h4>Everything in Pro, plus:</h4>
-      <ul>
-        <li>Dedicated account manager</li>
-        <li>Custom integrations</li>
-        <li>SLA guarantee</li>
-        <li>Advanced security</li>
-      </ul>
-    </div>
-  </section>
-
-  <section>
-    <h2>Feature Comparison</h2>
-    <table>
-      <!-- Comparison table -->
-    </table>
-  </section>
-</div>
-```
+Create pricing page with schema microdata markup:
+- Wrap page in Product itemscope
+- H1: "Acme CRM Pricing" (with itemprop="name")
+- H2: "Choose Your Plan" section
+- H3: Individual plans (Starter $29, Pro $49, Enterprise custom) each with Offer itemscope
+- H4: Feature lists within each plan with ItemList markup
+- H2: "Feature Comparison" section with table
 
 **Hierarchy:**
 1. H1: Pricing page topic

@@ -164,18 +164,24 @@ This guide is organized around four foundational layers:
   - Knowledge graph development
 
 ### Part 7: Industry Applications
-- [Use Case: SaaS Product LLMO](use-cases/saas-product.md)
-- [Use Case: E-commerce Brand LLMO](use-cases/ecommerce.md)
-- [Use Case: Professional Services LLMO](use-cases/professional-services.md)
-- [Use Case: Content Creator LLMO](use-cases/content-creator.md)
+- [Use Case: SaaS Companies](use-cases/saas-companies.md) - Product optimization, pricing transparency, integration marketing
+- [Use Case: E-Commerce](use-cases/ecommerce.md) - Product catalogs, category optimization, review integration
+- [Use Case: Professional Services](use-cases/professional-services.md) - Expertise demonstration, team visibility, case studies
+- [Use Case: B2B Manufacturing](use-cases/b2b-manufacturing.md) - Technical specifications, application guides, compliance
+- [Use Case: Content Publishers](use-cases/content-publishers.md) - Article optimization, author authority, topic clustering
 
-### Part 8: Practical Implementation
-- [Examples: Schema Markup Templates](examples/schema-templates/)
-- [Examples: JSON-LD Implementations](examples/jsonld/)
-- [Examples: Complete Website LLMO](examples/full-site/)
-- [Examples: Monitoring Setup](examples/monitoring/)
+### Part 8: Your LLMO Journey
+- [Conclusion: Your 90-Day LLMO Action Plan](conclusion.md)
+  - Week-by-week implementation roadmap
+  - Phase 1: Foundation (Weeks 1-4)
+  - Phase 2: Breadth and Depth (Weeks 5-8)
+  - Phase 3: Scale and Optimization (Weeks 9-12)
+  - Success metrics and validation checkpoints
+  - Common pitfalls to avoid
+  - Quick reference checklists
 
-- [Conclusion: Your 90-Day LLMO Action Plan](chapters/conclusion.md)
+### Part 9: Code Examples (LLMOWEB Repository - Coming Soon)
+All implementation code, templates, and examples are provided in the companion **LLMOWEB** repository to keep this book focused on concepts and strategy rather than code details.
 
 ## Who This Guide Is For
 

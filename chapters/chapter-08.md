@@ -15,284 +15,57 @@ This chapter reveals how to make dependencies explicit through prerequisite decl
 **"You must know A before learning B"**
 
 **Example: Course sequence**
-```
-Python Fundamentals (Level 1)
-    ↓ prerequisite for
-Python Data Structures (Level 2)
-    ↓ prerequisite for
-Python for Data Science (Level 3)
-```
+Python Fundamentals (Level 1) → prerequisite for → Python Data Structures (Level 2) → prerequisite for → Python for Data Science (Level 3)
 
 **Schema implementation:**
-```json
-{
-  "@context": "https://schema.org",
-  "@type": "Course",
-  "@id": "https://learnplatform.com/courses/python-data-science#course",
-  "name": "Python for Data Science",
-  "coursePrerequisites": [
-    {
-      "@type": "Course",
-      "@id": "https://learnplatform.com/courses/python-data-structures#course",
-      "name": "Python Data Structures"
-    },
-    {
-      "@type": "Course",
-      "@id": "https://learnplatform.com/courses/python-fundamentals#course",
-      "name": "Python Fundamentals"
-    }
-  ],
-  "educationalLevel": "Advanced"
-}
-```
+Use Course schema type with coursePrerequisites property listing all prerequisite courses with @id references. Include educationalLevel (Beginner/Intermediate/Advanced) to indicate complexity.
 
 **Natural language signals:**
-```html
-<div class="course-prerequisites">
-  <h3>Prerequisites</h3>
-  <p>
-    Before taking this course, you should complete:
-    <ul>
-      <li><a href="/courses/python-fundamentals">Python Fundamentals</a></li>
-      <li><a href="/courses/python-data-structures">Python Data Structures</a></li>
-    </ul>
-  </p>
-  <p>
-    Or have equivalent knowledge of Python basics and data structures (lists, dictionaries, sets).
-  </p>
-</div>
-```
+Create a "Prerequisites" section stating: "Before taking this course, you should complete: Python Fundamentals, Python Data Structures" with links to prerequisite courses. Include alternative path: "Or have equivalent knowledge of Python basics and data structures."
 
 ### Feature Dependencies (Required Components)
 
 **"Feature B requires Feature A to be enabled"**
 
 **Example: Product features**
-```
-Contact Management (Base Feature)
-    ↓ required by
-Email Integration (Requires contacts to exist)
-    ↓ enables
-Email Tracking (Requires integration)
-```
+Contact Management (Base Feature) → required by → Email Integration (Requires contacts to exist) → enables → Email Tracking (Requires integration)
 
 **Schema implementation:**
-```json
-{
-  "@type": "SoftwareApplication",
-  "name": "Email Tracking",
-  "description": "Track email opens and clicks",
-
-  "softwareRequirements": {
-    "@type": "SoftwareApplication",
-    "name": "Email Integration",
-    "description": "Must have email integration enabled"
-  },
-
-  "additionalProperty": [
-    {
-      "@type": "PropertyValue",
-      "name": "Required Features",
-      "value": "Contact Management, Email Integration"
-    }
-  ]
-}
-```
+Use SoftwareApplication schema with softwareRequirements property declaring prerequisite features. Add additionalProperty with PropertyValue listing all "Required Features" for clarity.
 
 **Natural language:**
-```html
-<section id="email-tracking">
-  <h2>Email Tracking</h2>
-  <p>
-    Track when contacts open your emails and click links.
-  </p>
-
-  <div class="feature-requirements">
-    <strong>Requires:</strong>
-    <ul>
-      <li><a href="#contact-management">Contact Management</a> (included in all plans)</li>
-      <li><a href="#email-integration">Email Integration</a> (Pro plan and above)</li>
-    </ul>
-  </div>
-
-  <p>
-    Once you've set up Email Integration, Email Tracking is automatically enabled...
-  </p>
-</section>
-```
+Create a "Requires:" section listing prerequisite features with links. State clearly: "Requires: Contact Management (included in all plans), Email Integration (Pro plan and above)." Then explain: "Once you've set up Email Integration, Email Tracking is automatically enabled."
 
 ### Tier Dependencies (Plan Requirements)
 
 **"Feature X is only available in Plan Y or higher"**
 
 **Example: Pricing tiers**
-```
-Starter Plan ($29)
-  ├─ Contact Management ✓
-  ├─ Basic Pipeline ✓
-  └─ Email Integration ✗
-
-Pro Plan ($49) [includes all Starter features]
-  ├─ Everything in Starter ✓
-  ├─ Email Integration ✓
-  ├─ Advanced Reporting ✓
-  └─ API Access ✗
-
-Enterprise Plan (Custom)
-  ├─ Everything in Pro ✓
-  ├─ API Access ✓
-  └─ Dedicated Support ✓
-```
+- Starter Plan ($29): Contact Management ✓, Basic Pipeline ✓, Email Integration ✗
+- Pro Plan ($49, includes all Starter): Everything in Starter ✓, Email Integration ✓, Advanced Reporting ✓, API Access ✗
+- Enterprise Plan (Custom): Everything in Pro ✓, API Access ✓, Dedicated Support ✓
 
 **Schema implementation:**
-```json
-{
-  "@type": "Product",
-  "name": "Acme CRM",
-
-  "offers": [
-    {
-      "@type": "Offer",
-      "name": "Starter Plan",
-      "price": "29",
-      "priceCurrency": "USD",
-
-      "itemOffered": {
-        "@type": "SoftwareApplication",
-        "featureList": [
-          "Contact Management",
-          "Basic Pipeline"
-        ]
-      }
-    },
-    {
-      "@type": "Offer",
-      "name": "Pro Plan",
-      "price": "49",
-      "priceCurrency": "USD",
-
-      "itemOffered": {
-        "@type": "SoftwareApplication",
-        "featureList": [
-          "Contact Management",
-          "Basic Pipeline",
-          "Email Integration",
-          "Advanced Reporting"
-        ]
-      },
-
-      "additionalProperty": {
-        "@type": "PropertyValue",
-        "name": "Includes",
-        "value": "All Starter features plus Email Integration and Advanced Reporting"
-      }
-    }
-  ]
-}
-```
+Create Product schema with multiple Offer entities, each listing features in featureList. Use additionalProperty to declare "Includes: All Starter features plus..." for Pro and Enterprise tiers. This makes tier dependencies explicit in machine-readable format.
 
 **Comparison table with dependencies:**
-```html
-<table>
-  <caption>Plan Comparison</caption>
-  <thead>
-    <tr>
-      <th>Feature</th>
-      <th>Starter</th>
-      <th>Pro</th>
-      <th>Enterprise</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Contact Management</td>
-      <td>✓</td>
-      <td>✓</td>
-      <td>✓</td>
-    </tr>
-    <tr>
-      <td>Email Integration</td>
-      <td>—</td>
-      <td>✓ <em>(requires Pro)</em></td>
-      <td>✓</td>
-    </tr>
-    <tr>
-      <td>Email Tracking</td>
-      <td>—</td>
-      <td>✓ <em>(requires Email Integration)</em></td>
-      <td>✓</td>
-    </tr>
-    <tr>
-      <td>API Access</td>
-      <td>—</td>
-      <td>—</td>
-      <td>✓ <em>(Enterprise only)</em></td>
-    </tr>
-  </tbody>
-</table>
-```
+Create an HTML table showing features across tiers. Mark unavailable features with "—" and available features with "✓". Add dependency notes in italics: "(requires Pro)", "(requires Email Integration)", "(Enterprise only)". This visual representation helps both humans and LLMs understand feature availability and dependencies.
 
 ### Conceptual Dependencies (Understanding Flow)
 
 **"Concept B builds on Concept A"**
 
 **Example: Understanding CRM**
-```
-What is CRM? (Foundation)
-    ↓ builds to
-Types of CRM Systems (Classification)
-    ↓ builds to
-CRM Features Explained (Components)
-    ↓ builds to
-Choosing the Right CRM (Application)
-```
+What is CRM? (Foundation) → builds to → Types of CRM Systems (Classification) → builds to → CRM Features Explained (Components) → builds to → Choosing the Right CRM (Application)
 
 **Content structure with dependencies:**
-```html
-<article>
-  <h1>Complete CRM Guide</h1>
+Create a table of contents listing topics in dependency order with reading instructions:
+1. "What is CRM?" (Start here)
+2. "Types of CRM Systems" (Read "What is CRM?" first)
+3. "CRM Features Explained" (Requires understanding of CRM types)
+4. "Choosing the Right CRM" (Final step)
 
-  <nav class="table-of-contents">
-    <h2>Contents</h2>
-    <ol>
-      <li><a href="#what-is-crm">What is CRM?</a> <em>(Start here)</em></li>
-      <li><a href="#types">Types of CRM Systems</a> <em>(Read "What is CRM?" first)</em></li>
-      <li><a href="#features">CRM Features Explained</a> <em>(Requires understanding of CRM types)</em></li>
-      <li><a href="#choosing">Choosing the Right CRM</a> <em>(Final step)</em></li>
-    </ol>
-  </nav>
-
-  <section id="what-is-crm">
-    <h2>What is CRM?</h2>
-    <p>Customer Relationship Management (CRM) is...</p>
-  </section>
-
-  <section id="types">
-    <h2>Types of CRM Systems</h2>
-    <p>
-      Now that you understand <a href="#what-is-crm">what CRM is</a>,
-      let's explore the main types...
-    </p>
-  </section>
-
-  <section id="features">
-    <h2>CRM Features Explained</h2>
-    <p>
-      Building on the <a href="#types">types of CRM systems</a>,
-      here are the core features you'll find...
-    </p>
-  </section>
-
-  <section id="choosing">
-    <h2>Choosing the Right CRM</h2>
-    <p>
-      Armed with knowledge of <a href="#what-is-crm">CRM basics</a>,
-      <a href="#types">system types</a>, and <a href="#features">key features</a>,
-      you're ready to choose...
-    </p>
-  </section>
-</article>
-```
+Within each section, reference prerequisites: "Now that you understand what CRM is, let's explore the main types..." and "Building on the types of CRM systems, here are the core features..." This explicit linking helps LLMs understand the conceptual flow.
 
 ## Progressive Complexity Implementation
 
@@ -319,92 +92,24 @@ Choosing the Right CRM (Application)
 - Edge cases and optimization
 
 **Schema declaration:**
-```json
-{
-  "@type": "TechArticle",
-  "name": "Advanced Pipeline Automation Strategies",
-  "educationalLevel": "Advanced",
-
-  "teaches": {
-    "@type": "DefinedTerm",
-    "name": "Pipeline Automation",
-    "description": "Automated deal progression based on triggers"
-  },
-
-  "educationalUse": "Advanced optimization techniques",
-
-  "typicalAgeRange": "Professional with 2+ years CRM experience",
-
-  "competencyRequired": [
-    "Understanding of CRM pipelines",
-    "Familiarity with automation concepts",
-    "Experience with basic workflow automation"
-  ]
-}
-```
+Use TechArticle schema with educationalLevel ("Beginner"/"Intermediate"/"Advanced"), teaches property defining the concept, educationalUse describing the learning objective, typicalAgeRange or experience level, and competencyRequired listing prerequisite knowledge areas.
 
 **Visual level indicators:**
-```html
-<article class="difficulty-advanced">
-  <header>
-    <h1>Advanced Pipeline Automation Strategies</h1>
-
-    <div class="metadata">
-      <span class="difficulty-badge">
-        <strong>Level:</strong> Advanced
-      </span>
-
-      <div class="prerequisites">
-        <strong>You should know:</strong>
-        <ul>
-          <li><a href="/guides/pipeline-basics">Pipeline Basics</a></li>
-          <li><a href="/guides/automation-intro">Automation Fundamentals</a></li>
-        </ul>
-      </div>
-
-      <div class="reading-time">
-        <strong>Time:</strong> 20 minutes
-      </div>
-    </div>
-  </header>
-
-  <div class="content">
-    <!-- Advanced content -->
-  </div>
-</article>
-```
+Display difficulty badge showing "Level: Advanced" prominently. Include "You should know:" section listing prerequisites with links (Pipeline Basics, Automation Fundamentals). Add estimated reading time (20 minutes) in metadata section.
 
 ### Progressive Disclosure Pattern
 
 **Start simple, add complexity gradually:**
 
 **Pattern 1: Accordion/Expand**
-```html
-<section>
-  <h2>Contact Management</h2>
+Present basic explanation first: "Contact Management lets you store customer information in one place: names, emails, phone numbers, and interaction history."
 
-  <div class="basic-explanation">
-    <p>
-      Contact Management lets you store customer information in one place:
-      names, emails, phone numbers, and interaction history.
-    </p>
-  </div>
+Then add an expandable "Learn More: Advanced Contact Features" section containing:
+- Custom Fields: Create unlimited custom fields for industry-specific data
+- Contact Segmentation: Use filters and tags for dynamic segments
+- Contact Scoring: Automatically score contacts based on engagement
 
-  <details>
-    <summary>Learn More: Advanced Contact Features</summary>
-    <div class="advanced-content">
-      <h3>Custom Fields</h3>
-      <p>Create unlimited custom fields to track industry-specific data...</p>
-
-      <h3>Contact Segmentation</h3>
-      <p>Use filters and tags to create dynamic segments...</p>
-
-      <h3>Contact Scoring</h3>
-      <p>Automatically score contacts based on engagement...</p>
-    </div>
-  </details>
-</section>
-```
+This progressive disclosure lets beginners understand the basics while advanced users can dive deeper.
 
 **Pattern 2: Layered Documentation**
 ```html

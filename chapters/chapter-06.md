@@ -120,24 +120,10 @@ Every entity gets exactly one canonical name—the authoritative, official name 
 First mention: Full canonical name
 Subsequent mentions (same page): Acceptable abbreviation
 
-```html
-<h1>Introducing Acme CRM Pro</h1>
-<p>
-  <span itemscope itemtype="https://schema.org/SoftwareApplication">
-    <span itemprop="name">Acme CRM Pro</span>
-  </span>
-  is a cloud-based sales management platform...
-</p>
-<p>
-  With <strong>Acme CRM Pro</strong>, you can manage contacts, track deals, and...
-</p>
-<p>
-  The <strong>Pro plan</strong> includes all Starter features plus...
-</p>
-```
-
-First mention: Full name with schema
-Later mentions: Full name or "Pro plan" (contextually clear)
+Example approach:
+- First mention: Use full name "Acme CRM Pro" with schema markup (itemscope, itemprop="name")
+- Subsequent mentions: Can use full name "Acme CRM Pro" or contextual abbreviation "Pro plan" when clear
+- Always mark the canonical name with schema on first mention
 
 **2. Legal/Formal Variations**
 Use in specific contexts only:
@@ -205,263 +191,38 @@ Right: "Acme CRM Pro" (canonical tier name)
 
 **Phase 1: Discovery (Find All Mentions)**
 
-```bash
-# Automated entity mention finder
-
-# Find all company name variations
-grep -r -i "acme" content/ | grep -v "Acme Corp"
-
-# Find all product variations
-grep -r -i "crm pro" content/ | grep -v "Acme CRM Pro"
-
-# Find all person name variations
-grep -r -i "jane" content/ | grep -v "Jane Smith"
-
-# Export results
-grep -r "acme" content/ > audit/company-mentions.txt
-grep -r "jane\|smith" content/ > audit/person-mentions.txt
-```
+Create automated scripts that search your content for all entity name variations using case-insensitive search, filtering out canonical names to find deviations. Export results to audit files for review.
 
 **Phase 2: Categorization**
 
-```python
-# Consistency audit script
-
-import re
-from collections import Counter
-
-class ConsistencyAuditor:
-    def __init__(self):
-        self.canonical_names = {
-            "organization": "Acme Corp",
-            "product_pro": "Acme CRM Pro",
-            "ceo": "Jane Smith"
-        }
-
-        self.acceptable_variants = {
-            "organization": [
-                "Acme Corp, Inc.",  # Legal only
-                "Acme"              # After first mention
-            ],
-            "product_pro": [
-                "Pro plan",         # Contextual
-                "CRM Pro"           # With clear context
-            ]
-        }
-
-        self.forbidden_variants = {
-            "organization": [
-                "Acme Inc.", "ACME", "Acme Corporation",
-                "AcmeCorp", "Acme Co."
-            ],
-            "product_pro": [
-                "Acme Pro", "CRM Professional", "Pro version",
-                "Acme CRM Professional"
-            ],
-            "ceo": [
-                "Jane", "J. Smith", "Ms. Smith", "Jane K. Smith"
-            ]
-        }
-
-    def audit_file(self, filepath):
-        with open(filepath, 'r') as f:
-            content = f.read()
-
-        issues = []
-        warnings = []
-
-        # Check for forbidden variants
-        for entity_type, forbidden_list in self.forbidden_variants.items():
-            canonical = self.canonical_names[entity_type]
-            for forbidden in forbidden_list:
-                if forbidden in content:
-                    issues.append({
-                        "file": filepath,
-                        "entity": entity_type,
-                        "found": forbidden,
-                        "should_be": canonical,
-                        "severity": "error"
-                    })
-
-        # Check for acceptable variants without first mention
-        for entity_type, acceptable_list in self.acceptable_variants.items():
-            canonical = self.canonical_names[entity_type]
-            for variant in acceptable_list:
-                # Find variant mentions
-                variant_positions = [m.start() for m in re.finditer(variant, content)]
-
-                if variant_positions:
-                    # Check if canonical appears before first variant
-                    canonical_positions = [m.start() for m in re.finditer(canonical, content)]
-
-                    if not canonical_positions or canonical_positions[0] > variant_positions[0]:
-                        warnings.append({
-                            "file": filepath,
-                            "entity": entity_type,
-                            "issue": f"'{variant}' used before canonical name '{canonical}'",
-                            "severity": "warning"
-                        })
-
-        return {"errors": issues, "warnings": warnings}
-
-    def audit_directory(self, directory):
-        all_errors = []
-        all_warnings = []
-
-        for filepath in get_all_files(directory):
-            result = self.audit_file(filepath)
-            all_errors.extend(result["errors"])
-            all_warnings.extend(result["warnings"])
-
-        return {
-            "total_errors": len(all_errors),
-            "total_warnings": len(all_warnings),
-            "errors": all_errors,
-            "warnings": all_warnings
-        }
-
-# Run audit
-auditor = ConsistencyAuditor()
-results = auditor.audit_directory("content/")
-
-# Generate report
-print(f"Consistency Audit Results:")
-print(f"Errors: {results['total_errors']}")
-print(f"Warnings: {results['total_warnings']}")
-
-for error in results['errors']:
-    print(f"\n❌ ERROR in {error['file']}")
-    print(f"   Found: '{error['found']}'")
-    print(f"   Should be: '{error['should_be']}'")
-
-for warning in results['warnings']:
-    print(f"\n⚠️ WARNING in {warning['file']}")
-    print(f"   {warning['issue']}")
-```
+Build a consistency auditor that:
+- Defines canonical names for all entities
+- Lists acceptable variants (with context rules: "Acme Corp, Inc." for legal only, "Acme" after first mention)
+- Lists forbidden variants (e.g., "ACME", "Acme Inc.", "Acme Corporation")
+- Scans all files for forbidden variants and flags as errors
+- Checks if acceptable variants are used before canonical name (flag as warnings)
+- Generates comprehensive report with error count, warning count, and specific file locations
 
 **Phase 3: Remediation**
 
-```python
-# Automated fixing (with caution)
+Create automated fixing scripts (use with caution!) that:
+- Define replacement mappings (wrong → correct)
+- Scan files and perform substitutions
+- Track changes made (from, to, count)
+- Support dry-run mode (preview changes without modifying files)
+- Require manual review before actual fixes to avoid unintended changes
 
-class ConsistencyFixer:
-    def __init__(self):
-        self.replacements = {
-            # Organization
-            "Acme Inc.": "Acme Corp",
-            "ACME": "Acme Corp",
-            "Acme Corporation": "Acme Corp",
-
-            # Product
-            "Acme CRM Professional": "Acme CRM Pro",
-            "CRM Pro ": "Acme CRM Pro ",  # Space to avoid partial matches
-
-            # Person
-            "Ms. Smith": "Jane Smith",
-            "J. Smith": "Jane Smith"
-        }
-
-    def fix_file(self, filepath, dry_run=True):
-        with open(filepath, 'r') as f:
-            content = f.read()
-
-        original_content = content
-        changes = []
-
-        for wrong, correct in self.replacements.items():
-            if wrong in content:
-                count = content.count(wrong)
-                content = content.replace(wrong, correct)
-                changes.append({
-                    "from": wrong,
-                    "to": correct,
-                    "count": count
-                })
-
-        if dry_run:
-            return {
-                "file": filepath,
-                "would_change": len(changes) > 0,
-                "changes": changes
-            }
-        else:
-            if content != original_content:
-                with open(filepath, 'w') as f:
-                    f.write(content)
-                return {
-                    "file": filepath,
-                    "changed": True,
-                    "changes": changes
-                }
-
-# Dry run first!
-fixer = ConsistencyFixer()
-dry_run_results = fixer.fix_file("content/page.html", dry_run=True)
-
-# Review changes
-if dry_run_results['would_change']:
-    print(f"Would make changes to {dry_run_results['file']}:")
-    for change in dry_run_results['changes']:
-        print(f"  {change['from']} → {change['to']} ({change['count']} times)")
-
-# If approved, run actual fix
-# actual_results = fixer.fix_file("content/page.html", dry_run=False)
-```
+Review the proposed changes before applying, run the fixer in actual mode only after manual approval.
 
 ### Schema Markup Consistency
 
 **Unified schema library ensures consistency:**
 
-```javascript
-// schema-constants.js
-// Single source of truth for all entity names
-
-export const ENTITIES = {
-  organization: {
-    "@type": "Corporation",
-    "@id": "https://acmecorp.com/#organization",
-    "name": "Acme Corp",
-    "alternateName": ["Acme Corporation"],  // Only acceptable variants
-    "legalName": "Acme Corp, Inc.",
-    // ... rest of organization schema
-  },
-
-  products: {
-    starter: {
-      "@type": "SoftwareApplication",
-      "@id": "https://acmecorp.com/products/crm-starter#product",
-      "name": "Acme CRM Starter",  // CANONICAL NAME
-      // ... rest of product schema
-    },
-    pro: {
-      "@type": "SoftwareApplication",
-      "@id": "https://acmecorp.com/products/crm-pro#product",
-      "name": "Acme CRM Pro",  // CANONICAL NAME
-      // ... rest of product schema
-    }
-  },
-
-  people: {
-    jane_smith: {
-      "@type": "Person",
-      "@id": "https://acmecorp.com/about/team/jane-smith#person",
-      "name": "Jane Smith",  // CANONICAL NAME (no variations)
-      // ... rest of person schema
-    }
-  }
-};
-
-// Usage across site
-import { ENTITIES } from './schema-constants.js';
-
-// Homepage
-const orgSchema = ENTITIES.organization;
-
-// Product page
-const productSchema = ENTITIES.products.pro;
-
-// Always uses canonical name from constants
-```
+Create a centralized schema constants file that serves as the single source of truth for all entity names:
+- Define organization schema with canonical name "Acme Corp", acceptable alternateNames, and legal name
+- Define product schemas with canonical names ("Acme CRM Starter", "Acme CRM Pro")
+- Define person schemas with canonical names (no variations allowed)
+- Import and use these constants across all pages
 
 **Benefits:**
 - Single update point for any name change
@@ -472,78 +233,28 @@ const productSchema = ENTITIES.products.pro;
 
 **Canonical names in content style guide:**
 
-```markdown
-# Acme Corp Content Style Guide
+Create a comprehensive content style guide with entity naming rules:
 
-## Entity Naming Rules
+**Rule 1: Always Use Canonical Names**
+- DO: Full canonical names ("Acme Corp", "Acme CRM Pro", "Jane Smith")
+- DON'T: Shortened forms on first mention ("Acme", "CRM Pro", "Jane")
 
-### Rule 1: Always Use Canonical Names
+**Rule 2: First Mention = Full Canonical Name**
+- First mention on page: Use full canonical name with context
+- Subsequent mentions: Can use canonical or approved abbreviation
 
-**DO:**
-- "Acme Corp was founded in 2020..."
-- "Acme CRM Pro is a sales management platform..."
-- "Jane Smith, CEO of Acme Corp, explains..."
+**Rule 3: Schema Markup = Canonical Only**
+- Always use canonical names in itemprop="name" markup
+- Never use abbreviations or variations in schema markup
 
-**DON'T:**
-- "Acme was founded..." (unless after first mention)
-- "Our CRM Pro solution..." (missing brand name)
-- "Jane, our CEO..." (missing last name)
+**Rule 4: Abbreviations Require Definition**
+- First usage: Define the abbreviation (e.g., "Rapid Deployment Framework (RDF)")
+- Later usage: Can use abbreviation ("RDF")
 
-### Rule 2: First Mention = Full Canonical Name
-
-**First mention on page:**
-```
-"Acme Corp, a San Francisco-based SaaS company, offers Acme CRM Pro for startups."
-```
-
-**Subsequent mentions (same page):**
-```
-"Acme Corp's flagship product includes... The Pro plan provides..."
-```
-
-### Rule 3: Schema Markup = Canonical Only
-
-**Always:**
-```html
-<span itemprop="name">Acme Corp</span>
-<span itemprop="name">Acme CRM Pro</span>
-<span itemprop="name">Jane Smith</span>
-```
-
-**Never:**
-```html
-<span itemprop="name">Acme</span> ❌
-<span itemprop="name">CRM Pro</span> ❌
-<span itemprop="name">Jane</span> ❌
-```
-
-### Rule 4: Abbreviations Require Definition
-
-**First usage:**
-```
-"Acme Corp developed the Rapid Deployment Framework (RDF) to..."
-```
-
-**Later usage:**
-```
-"Using RDF, customers can deploy in 5 minutes..."
-```
-
-### Rule 5: Product Tiers = Full Name
-
-**DO:**
-- "Acme CRM Starter is priced at $29/user/month"
-- "Upgrade to Acme CRM Pro for $49/user/month"
-
-**DON'T:**
-- "Starter is priced at $29" (missing product context)
-- "Upgrade to Pro for $49" (ambiguous on first mention)
-
-**Exception:** After establishing context:
-```
-"Acme CRM comes in three tiers: Starter ($29), Pro ($49), and Enterprise (custom).
-The Starter plan includes... The Pro plan adds... Enterprise customers get..."
-```
+**Rule 5: Product Tiers = Full Name**
+- DO: "Acme CRM Starter", "Acme CRM Pro"
+- DON'T: "Starter", "Pro" on first mention
+- Exception: After establishing context in the same paragraph
 
 ## Advanced Consistency Strategies
 
@@ -671,56 +382,16 @@ Use: Product name + "version" + number
 
 **Pre-commit Hook (Git):**
 
-```bash
-#!/bin/bash
-# .git/hooks/pre-commit
-# Enforce naming consistency before commits
-
-echo "Checking naming consistency..."
-
-# Run consistency checker
-python scripts/consistency-checker.py --staged
-
-if [ $? -ne 0 ]; then
-  echo "❌ Consistency check failed!"
-  echo "Fix naming issues before committing."
-  echo "Run: python scripts/consistency-checker.py --fix"
-  exit 1
-fi
-
-echo "✓ Naming consistency verified"
-exit 0
-```
+Create a git pre-commit hook that runs the consistency checker on staged files. If forbidden variants are detected, block the commit and display error message with instructions to fix. Only allow commit if naming consistency check passes.
 
 **Content Management System (CMS) Integration:**
 
-```javascript
-// WordPress custom plugin
-
-add_filter('content_save_pre', 'check_naming_consistency');
-
-function check_naming_consistency($content) {
-  $forbidden_terms = [
-    'Acme Inc.',
-    'Acme Corporation',
-    'ACME',
-    'CRM Professional',
-    // ... all forbidden variants
-  ];
-
-  foreach ($forbidden_terms as $term) {
-    if (strpos($content, $term) !== false) {
-      wp_die(
-        'Content contains non-canonical entity name: "' . $term . '". ' .
-        'Please use canonical names. See style guide.',
-        'Naming Consistency Error'
-      );
-    }
-  }
-
-  return $content;
-}
-```
+Integrate naming consistency checks into your CMS (WordPress, Drupal, custom):
+- Add content save filter/hook
+- Check for forbidden entity name variants before saving
+- Block publication if non-canonical names detected
+- Display error message with canonical name requirement
+- Refer content creator to style guide
 
 **Prevents publication of inconsistent content.**
 
